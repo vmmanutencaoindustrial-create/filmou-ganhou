@@ -7,200 +7,285 @@
 <meta name="description" content="Startup de IA americana (Y Combinator) com escritório em São Paulo paga até R$ 25 por hora aprovada por vídeos das tarefas que você já faz em casa. Sem vender nada, sem aparecer, sem pagar nada. Saque via PIX.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <!-- META PIXEL: colar o código do pixel aqui antes de rodar tráfego (evento PageView) -->
 <style>
   :root{
-    --bg:#f0f1ed; --grid:rgba(20,24,22,.05);
-    --card:#ffffff; --card2:#f6f7f4;
-    --ink:#14181a; --muted:#5c6660; --line:rgba(20,24,26,.09);
-    --green:#22c55e; --green-dark:#17a94d; --green-ink:#052e12;
-    --green-soft:#e6f7eb; --green-line:rgba(34,197,94,.35);
+    --bg:#f2f3f0; --grid:rgba(18,22,20,.045);
+    --card:#ffffff; --card2:#f6f7f4; --dark:#101514; --dark2:#1a211f;
+    --ink:#12161a; --muted:#5f6a64; --line:rgba(18,22,26,.08);
+    --green:#22c55e; --green-dark:#16a34a; --green-deep:#0e7a37; --green-ink:#04170b;
+    --green-soft:#e7f8ed; --green-line:rgba(34,197,94,.32); --glow:rgba(34,197,94,.5);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
     background-color:var(--bg);
-    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
-    background-size:44px 44px;
-    color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;overflow-x:hidden
+    background-image:
+      radial-gradient(900px 480px at 50% -140px, rgba(34,197,94,.09), transparent 65%),
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:100% 100%,46px 46px,46px 46px;
+    color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
   }
-  .grotesk{font-family:'Space Grotesk',sans-serif}
-  .wrap{max-width:660px;margin:0 auto;padding:0 18px}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+  svg{display:block}
 
-  /* TOPBAR */
-  .topbar{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .topbar .in{max-width:660px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:9px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.15rem;letter-spacing:-.02em}
-  .mark{width:30px;height:30px;border-radius:9px;background:var(--green);display:flex;align-items:center;justify-content:center;color:var(--green-ink);font-size:1rem}
-  .toplink{background:var(--green);color:var(--green-ink);font-weight:700;font-size:.85rem;text-decoration:none;border-radius:999px;padding:9px 20px;transition:background .15s}
+  /* ============ TOPBAR ============ */
+  .topbar{position:sticky;top:0;z-index:60;background:rgba(242,243,240,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .topbar .in{max-width:680px;margin:0 auto;padding:13px 20px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.12rem;letter-spacing:-.02em}
+  .mark{width:32px;height:32px;border-radius:10px;background:linear-gradient(150deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px -4px var(--glow)}
+  .mark svg{width:15px;height:15px}
+  .live{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.12em;color:var(--green-deep);text-transform:uppercase}
+  .live i{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--glow)}55%{box-shadow:0 0 0 7px transparent}}
+  .toplink{background:var(--ink);color:#fff;font-weight:700;font-size:.82rem;text-decoration:none;border-radius:999px;padding:9px 19px;transition:all .2s}
   .toplink:hover{background:var(--green-dark)}
 
-  /* CARD BASE */
-  .panel{background:var(--card);border-radius:24px;box-shadow:0 14px 40px -24px rgba(20,24,26,.28);padding:28px 22px;margin:16px 0}
-
-  /* HERO */
-  .hero{margin-top:18px;text-align:left;position:relative;overflow:hidden}
-  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.4rem,10vw,3.6rem);line-height:1.02;letter-spacing:-.04em}
-  h1 .g{color:var(--green-dark)}
-  .sub{color:var(--muted);margin-top:14px;font-size:1.04rem}
+  /* ============ HERO ============ */
+  .hero{padding:52px 0 20px;position:relative}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:.76rem;font-weight:700;color:var(--muted);margin-bottom:22px;box-shadow:0 4px 16px -10px rgba(18,22,26,.25)}
+  .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.8s infinite}
+  .eyebrow b{color:var(--ink)}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.5rem,10.5vw,3.9rem);line-height:1.01;letter-spacing:-.045em}
+  h1 .g{background:linear-gradient(120deg,var(--green-dark),var(--green-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);margin-top:18px;font-size:1.05rem;max-width:560px}
   .sub b{color:var(--ink)}
-  .btn{display:flex;flex-direction:column;align-items:center;gap:1px;background:var(--green);color:var(--green-ink);font-weight:800;font-size:1.05rem;padding:16px;border-radius:14px;text-decoration:none;margin-top:22px;transition:background .15s,transform .12s}
-  .btn:hover{background:var(--green-dark)}
-  .btn:active{transform:scale(.98)}
-  .btn small{font-weight:600;font-size:.72rem;opacity:.75}
-  .btn-o{display:block;text-align:center;border:1.5px solid var(--line);color:var(--ink);font-weight:700;font-size:.98rem;padding:14px;border-radius:14px;text-decoration:none;margin-top:10px;background:#fff}
-  .paywith{margin-top:20px;font-size:.8rem;color:var(--muted)}
-  .chips{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-  .chip{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:.82rem;font-weight:700}
-  .chip.g{background:var(--green-soft);border-color:var(--green-line);color:var(--green-dark)}
+  .cta{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;background:linear-gradient(160deg,var(--green),var(--green-dark));color:var(--green-ink);font-weight:800;font-size:1.07rem;padding:17px;border-radius:15px;text-decoration:none;margin-top:26px;box-shadow:0 18px 38px -14px var(--glow),inset 0 1px 0 rgba(255,255,255,.35);overflow:hidden;transition:transform .15s}
+  .cta:active{transform:scale(.98)}
+  .cta::after{content:"";position:absolute;top:0;bottom:0;width:46%;left:-60%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-18deg);animation:sheen 4.2s ease-in-out infinite}
+  @keyframes sheen{0%,55%{left:-60%}80%,100%{left:130%}}
+  .cta small{font-weight:600;font-size:.72rem;opacity:.8;text-align:center}
+  .cta-o{display:block;text-align:center;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:700;font-size:.95rem;padding:14px;border-radius:15px;text-decoration:none;margin-top:10px;transition:border-color .2s}
+  .cta-o:hover{border-color:var(--green)}
+  .objections{display:flex;gap:7px;margin-top:20px;flex-wrap:wrap}
+  .obj{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 13px;font-size:.78rem;font-weight:700;color:var(--muted)}
+  .obj svg{width:13px;height:13px;flex:0 0 13px}
+  .obj.yes{background:var(--green-soft);border-color:var(--green-line);color:var(--green-deep)}
 
-  /* ROBOT (CSS) */
-  .bot{position:absolute;right:-26px;bottom:-34px;width:150px;height:190px;opacity:.97;pointer-events:none}
-  .bot .head{width:104px;height:120px;background:linear-gradient(145deg,#2b3136,#14181a 60%);border-radius:48px 48px 40px 40px;position:relative;margin:0 auto;box-shadow:inset 0 2px 6px rgba(255,255,255,.14),0 18px 30px -14px rgba(20,24,26,.5)}
-  .bot .visor{position:absolute;left:16px;right:16px;top:44px;height:26px;background:#0a0d0e;border-radius:14px;overflow:hidden}
-  .bot .visor i{position:absolute;left:10%;right:10%;top:11px;height:3.5px;border-radius:3px;background:var(--green);box-shadow:0 0 12px var(--green),0 0 26px rgba(34,197,94,.65);animation:blink 3.4s infinite}
-  @keyframes blink{0%,44%,50%,100%{transform:scaleX(1)}47%{transform:scaleX(.06)}}
-  .bot .neck{width:34px;height:18px;background:#191d20;margin:-2px auto 0;border-radius:6px}
-  .bot .torso{width:130px;height:64px;background:linear-gradient(145deg,#343b41,#191d20);border-radius:28px 28px 0 0;margin:0 auto;box-shadow:inset 0 2px 5px rgba(255,255,255,.12)}
-  .bot .torso b{display:block;width:12px;height:12px;border-radius:50%;background:var(--green);margin:16px auto 0;box-shadow:0 0 10px var(--green)}
-  @media(max-width:560px){
-    .hero{padding-bottom:118px}
-    .bot{width:104px;height:134px;right:2px;bottom:-14px}
-    .bot .head{width:72px;height:84px;border-radius:34px 34px 28px 28px}
-    .bot .visor{left:12px;right:12px;top:30px;height:18px}
-    .bot .visor i{top:7.5px}
-    .bot .torso{width:92px;height:46px}
-    .bot .torso b{margin-top:12px}
-    .chips{max-width:calc(100% - 112px)}
-  }
+  /* ============ PHONE + ROBOT STAGE ============ */
+  .stage{position:relative;padding:44px 0 10px;perspective:1200px}
+  .stage-glow{position:absolute;inset:auto 0 -8%;height:70%;background:radial-gradient(60% 80% at 50% 100%,rgba(34,197,94,.13),transparent 70%);pointer-events:none}
+  .phone{width:min(330px,84vw);margin:0 auto;background:linear-gradient(160deg,#232a28,#101514 55%);border-radius:46px;padding:12px;box-shadow:0 46px 90px -34px rgba(16,21,20,.55),inset 0 1px 0 rgba(255,255,255,.14);position:relative;transform-style:preserve-3d;transition:transform .25s ease-out;animation:float 6.5s ease-in-out infinite}
+  @keyframes float{0%,100%{translate:0 0}50%{translate:0 -9px}}
+  .screen{background:#f4f5f2;border-radius:36px;overflow:hidden;padding:18px 15px 16px;position:relative}
+  .island{width:96px;height:26px;background:#101514;border-radius:16px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;gap:6px}
+  .island i{width:5px;height:5px;border-radius:50%;background:#2c3a34}
+  .island i:first-child{background:var(--green);box-shadow:0 0 6px var(--glow)}
+  .s-top{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .s-hello{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.32rem;margin:6px 0 12px;letter-spacing:-.02em}
+  .s-task{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:9px;box-shadow:0 8px 20px -14px rgba(16,21,20,.3)}
+  .s-task .r1{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.9rem}
+  .s-task .price{font-family:'Space Grotesk',sans-serif;color:var(--green-dark);font-weight:700}
+  .s-task .r2{color:var(--muted);font-size:.73rem;margin-top:2px}
+  .rec{display:flex;align-items:center;gap:8px;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+  .rec i{width:8px;height:8px;border-radius:50%;background:#e5484d;animation:pulse 1.15s infinite}
+  .rec .bar{flex:1;height:4px;background:var(--card2);border-radius:4px;overflow:hidden}
+  .rec .bar b{display:block;height:100%;width:36%;background:linear-gradient(90deg,var(--green),var(--green-dark));border-radius:4px;animation:grow 3.2s ease-in-out infinite}
+  @keyframes grow{0%{width:24%}50%{width:62%}100%{width:24%}}
+  .s-pay{background:linear-gradient(150deg,#eafaf0,#dcf5e6);border:1px solid var(--green-line);border-radius:16px;padding:13px 14px;position:relative;overflow:hidden}
+  .s-pay::after{content:"";position:absolute;top:-40%;right:-16%;width:120px;height:120px;background:radial-gradient(circle,rgba(34,197,94,.22),transparent 70%)}
+  .s-pay .lab{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+  .s-pay .lab .paid{color:var(--green-deep)}
+  .s-pay .val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.85rem;color:var(--green-deep);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .s-pay .nxt{font-size:.68rem;color:var(--muted)}
+  /* feed de aprovações */
+  .feed{margin-top:10px;display:flex;flex-direction:column;gap:6px;min-height:96px}
+  .fitem{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 11px;font-size:.7rem;color:var(--muted);box-shadow:0 6px 16px -12px rgba(16,21,20,.35);animation:drop .45s cubic-bezier(.2,.9,.3,1.2)}
+  @keyframes drop{from{opacity:0;transform:translateY(-10px) scale(.97)}to{opacity:1;transform:none}}
+  .fitem .chk{width:17px;height:17px;border-radius:50%;background:var(--green-soft);display:flex;align-items:center;justify-content:center;flex:0 0 17px}
+  .fitem .chk svg{width:9px;height:9px}
+  .fitem b{color:var(--ink)}
+  .fitem .amt{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--green-deep);white-space:nowrap}
+  .sim-note{text-align:center;font-size:.62rem;color:var(--muted);opacity:.75;margin-top:10px}
+  /* robô ao lado */
+  .bot-wrap{position:absolute;right:max(8px,calc(50% - 320px));bottom:22px;width:108px;pointer-events:none;animation:float 7.5s ease-in-out infinite reverse;filter:drop-shadow(0 22px 26px rgba(16,21,20,.3))}
+  @media(max-width:760px){.bot-wrap{display:none}}
 
-  /* SECTION HEAD */
-  section{padding:26px 0 4px}
-  .kicker{display:inline-block;background:var(--green-soft);color:var(--green-dark);border:1px solid var(--green-line);border-radius:999px;padding:5px 14px;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
-  h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.55rem,6vw,2.1rem);line-height:1.1;letter-spacing:-.03em;margin-bottom:8px}
-  .lead{color:var(--muted);margin-bottom:18px;font-size:.97rem}
+  /* ============ METRICS ============ */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:30px}
+  @media(max-width:560px){.metrics{grid-template-columns:repeat(2,1fr)}}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 14px;position:relative;overflow:hidden}
+  .metric::before{content:"";position:absolute;top:0;left:14px;right:14px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--green),transparent)}
+  .metric .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .metric .l{font-family:'JetBrains Mono',monospace;font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
 
-  /* TASK CAROUSEL */
-  .reel{display:flex;gap:12px;overflow-x:auto;padding:4px 2px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+  /* ============ SECTIONS ============ */
+  section{padding:34px 0 6px}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green-deep);margin-bottom:12px}
+  .kicker::before{content:"";width:22px;height:1.5px;background:var(--green)}
+  h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.6rem,6.4vw,2.2rem);line-height:1.08;letter-spacing:-.035em;margin-bottom:9px}
+  .lead{color:var(--muted);margin-bottom:20px;font-size:.98rem;max-width:540px}
+
+  /* steps */
+  .step{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:11px;box-shadow:0 14px 34px -26px rgba(16,21,20,.4);transition:transform .2s,box-shadow .2s}
+  .step:hover{transform:translateY(-2px);box-shadow:0 20px 40px -24px rgba(16,21,20,.45)}
+  .snum{flex:0 0 46px;height:46px;border-radius:14px;background:linear-gradient(150deg,var(--green-soft),#d8f3e2);border:1px solid var(--green-line);display:flex;align-items:center;justify-content:center}
+  .snum svg{width:21px;height:21px}
+  .step h3{font-family:'Space Grotesk',sans-serif;font-size:1.04rem;font-weight:700;margin-bottom:3px;letter-spacing:-.01em}
+  .step p{color:var(--muted);font-size:.89rem}
+
+  /* task reel */
+  .reel{display:flex;gap:11px;overflow-x:auto;padding:4px 2px 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
   .reel::-webkit-scrollbar{display:none}
-  .tcard{flex:0 0 190px;scroll-snap-align:start;background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 10px 26px -16px rgba(20,24,26,.3)}
-  .tcard .th{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:2.6rem;position:relative}
-  .tcard .th::after{content:"● REC";position:absolute;top:10px;left:10px;font-size:.6rem;font-weight:800;letter-spacing:.08em;color:#fff;background:rgba(20,24,26,.55);padding:3px 8px;border-radius:999px}
-  .tcard .lb{padding:10px 13px;font-size:.76rem;color:var(--muted);font-weight:600}
-  .tcard .lb b{display:block;color:var(--ink);font-size:.82rem}
-  .g1{background:linear-gradient(135deg,#dff1e2,#c2e8cd}
-  .g1{background:linear-gradient(135deg,#dff1e2,#c2e8cd)}
-  .g2{background:linear-gradient(135deg,#e8ecf5,#cdd8ec)}
-  .g3{background:linear-gradient(135deg,#f5ecdf,#ecd9bd)}
-  .g4{background:linear-gradient(135deg,#f0e4ef,#e3cbe0)}
-  .g5{background:linear-gradient(135deg,#e4f0f2,#c8e3e8)}
-  .g6{background:linear-gradient(135deg,#f2efe0,#e8e0bd)}
+  .tcard{flex:0 0 168px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 12px 28px -20px rgba(16,21,20,.4)}
+  .tcard .th{aspect-ratio:5/4;display:flex;align-items:center;justify-content:center;position:relative;background:linear-gradient(150deg,var(--dark),var(--dark2))}
+  .tcard .th svg{width:44px;height:44px;opacity:.94}
+  .tcard .th::after{content:"REC";position:absolute;top:10px;left:10px;font-family:'JetBrains Mono',monospace;font-size:.52rem;font-weight:700;letter-spacing:.14em;color:#ffb3b6;background:rgba(229,72,77,.16);border:1px solid rgba(229,72,77,.35);padding:3px 7px 3px 16px;border-radius:999px}
+  .tcard .th::before{content:"";position:absolute;top:17.5px;left:17px;width:6px;height:6px;border-radius:50%;background:#e5484d;z-index:1;animation:pulse 1.2s infinite}
+  .tcard .lb{padding:11px 13px}
+  .tcard .lb b{display:block;color:var(--ink);font-size:.84rem;font-weight:700}
+  .tcard .lb span{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:700;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
 
-  /* FEATURES */
-  .feat{display:flex;gap:15px;background:var(--card);border-radius:20px;box-shadow:0 12px 30px -20px rgba(20,24,26,.3);padding:20px;margin-bottom:12px;align-items:flex-start}
-  .fic{flex:0 0 46px;height:46px;border-radius:14px;background:var(--green-soft);display:flex;align-items:center;justify-content:center;font-size:1.25rem}
-  .feat h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:2px}
-  .feat p{color:var(--muted);font-size:.88rem}
-
-  /* PHONE */
-  .phone-wrap{display:flex;justify-content:center;padding:8px 0 4px}
-  .phone{width:min(320px,86vw);background:#14181a;border-radius:42px;padding:11px;box-shadow:0 30px 60px -22px rgba(20,24,26,.5)}
-  .screen{background:var(--bg);border-radius:33px;overflow:hidden;padding:16px 14px 18px}
-  .notch{width:100px;height:24px;background:#14181a;border-radius:14px;margin:0 auto 12px}
-  .s-row{display:flex;justify-content:space-between;font-size:.66rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;font-weight:700}
-  .s-hello{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.3rem;margin:4px 0 12px}
-  .s-card{background:#fff;border-radius:15px;padding:12px 13px;margin-bottom:9px;box-shadow:0 6px 18px -12px rgba(20,24,26,.25)}
-  .s-card .t{display:flex;justify-content:space-between;font-weight:700;font-size:.88rem}
-  .s-card .t .price{color:var(--green-dark)}
-  .s-card .d{color:var(--muted);font-size:.74rem;margin-top:1px}
-  .s-rec{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:.72rem;color:var(--muted)}
-  .s-rec .r{width:8px;height:8px;border-radius:50%;background:#e5484d;animation:pulse 1.2s infinite}
-  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(229,72,77,.4)}55%{box-shadow:0 0 0 7px transparent}}
-  .s-bar{flex:1;height:4px;background:var(--card2);border-radius:4px;overflow:hidden}
-  .s-bar i{display:block;height:100%;width:36%;background:var(--green);border-radius:4px;animation:grow 3s ease-in-out infinite}
-  @keyframes grow{0%{width:26%}50%{width:58%}100%{width:26%}}
-  .s-pay{background:var(--green-soft);border:1px solid var(--green-line);border-radius:15px;padding:12px 13px}
-  .s-pay .lab{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);font-weight:700;letter-spacing:.05em}
-  .s-pay .lab span:last-child{color:var(--green-dark)}
-  .s-pay .val{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.65rem;color:var(--green-dark)}
-  .s-pay .nxt{font-size:.7rem;color:var(--muted)}
-
-  /* VIDEOS */
-  .vid{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 12px 30px -20px rgba(20,24,26,.3);margin-bottom:14px}
+  /* videos */
+  .vid{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 16px 36px -26px rgba(16,21,20,.45);margin-bottom:14px}
   .vid iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
-  .vid .cap{padding:12px 16px;font-size:.8rem;color:var(--muted)}
+  .vid .cap{padding:13px 17px;display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--muted)}
+  .vid .cap .tag{font-family:'JetBrains Mono',monospace;font-size:.54rem;font-weight:700;letter-spacing:.12em;color:var(--green-deep);background:var(--green-soft);border:1px solid var(--green-line);border-radius:999px;padding:4px 9px;white-space:nowrap}
   .vid .cap b{color:var(--ink)}
 
-  /* CALC */
-  .calc input[type=range]{width:100%;accent-color:var(--green);margin:16px 0 8px}
-  .calc .hours{color:var(--muted);font-size:.9rem}
-  .calc .result{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;font-weight:700;color:var(--green-dark)}
-  .calc .note{color:var(--muted);font-size:.73rem;margin-top:10px}
+  /* calc */
+  .calc{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 22px;box-shadow:0 20px 44px -30px rgba(16,21,20,.5)}
+  .calc .hours{color:var(--muted);font-size:.92rem}
+  .calc input[type=range]{width:100%;accent-color:var(--green-dark);margin:18px 0 10px;height:5px}
+  .calc .result{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;letter-spacing:-.03em;background:linear-gradient(120deg,var(--green-dark),var(--green-deep));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+  .calc .note{color:var(--muted);font-size:.74rem;margin-top:12px}
 
-  /* REQ */
-  .req li{list-style:none;padding:12px 0;border-bottom:1px solid var(--line);font-size:.9rem;color:var(--muted)}
-  .req li:last-child{border-bottom:none}
-  .req li b{color:var(--ink)}
-  .ok{color:var(--green-dark);font-weight:800;margin-right:8px}
-  .no{color:#e5484d;font-weight:800;margin-right:8px}
+  /* req */
+  .reqbox{background:#fff;border:1px solid var(--line);border-radius:20px;padding:8px 20px;box-shadow:0 14px 34px -26px rgba(16,21,20,.4)}
+  .reqbox li{list-style:none;display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+  .reqbox li:last-child{border-bottom:none}
+  .reqbox li b{color:var(--ink)}
+  .ric{width:20px;height:20px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex:0 0 20px;margin-top:2px}
+  .ric.y{background:var(--green-soft)}.ric.n{background:#fdebec}
+  .ric svg{width:11px;height:11px}
 
-  /* FAQ */
-  details{background:var(--card);border-radius:16px;box-shadow:0 8px 24px -18px rgba(20,24,26,.3);margin-bottom:10px;overflow:hidden}
-  summary{padding:16px 18px;font-weight:700;cursor:pointer;font-size:.93rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  /* faq */
+  details{background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:0 10px 28px -24px rgba(16,21,20,.4);margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+  details[open]{border-color:var(--green-line)}
+  summary{padding:17px 19px;font-weight:700;cursor:pointer;font-size:.94rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
   summary::-webkit-details-marker{display:none}
-  summary::after{content:"▾";color:var(--muted);font-size:1rem;transition:transform .2s}
-  details[open] summary::after{transform:rotate(180deg)}
-  details .a{padding:0 18px 16px;color:var(--muted);font-size:.89rem}
+  summary .pl{width:22px;height:22px;border-radius:8px;background:var(--card2);display:flex;align-items:center;justify-content:center;flex:0 0 22px;transition:all .25s}
+  summary .pl::before{content:"+";color:var(--muted);font-weight:600;font-size:1rem;line-height:1}
+  details[open] summary .pl{background:var(--green-soft);transform:rotate(45deg)}
+  details[open] summary .pl::before{color:var(--green-deep)}
+  details .a{padding:0 19px 17px;color:var(--muted);font-size:.9rem}
+  details .a b{color:var(--ink)}
 
-  /* STICKY */
-  .sticky{position:fixed;bottom:0;left:0;right:0;padding:11px 16px calc(11px + env(safe-area-inset-bottom));background:rgba(240,241,237,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);z-index:50;transform:translateY(110%);transition:transform .3s}
+  /* sticky */
+  .sticky{position:fixed;bottom:0;left:0;right:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(242,243,240,.9);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:50;transform:translateY(110%);transition:transform .35s cubic-bezier(.3,.8,.3,1)}
   .sticky.show{transform:none}
-  .sticky a{display:block;text-align:center;background:var(--green);color:var(--green-ink);font-weight:800;padding:15px;border-radius:14px;text-decoration:none;font-size:.98rem}
+  .sticky a{display:block;text-align:center;background:linear-gradient(160deg,var(--green),var(--green-dark));color:var(--green-ink);font-weight:800;padding:15px;border-radius:14px;text-decoration:none;font-size:.98rem;box-shadow:0 10px 26px -12px var(--glow)}
 
-  footer{padding:34px 0 130px;margin-top:26px}
-  footer .panel{padding:24px 22px}
+  footer{padding:38px 0 128px;margin-top:28px}
+  footer .fbox{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 22px}
   footer p{color:var(--muted);font-size:.73rem;margin-bottom:10px}
   footer b{color:var(--ink)}
-  .follow{font-family:'Space Grotesk',sans-serif;text-align:center;font-size:.7rem;letter-spacing:.28em;color:var(--muted);margin:18px 0 0}
+  .madein{font-family:'JetBrains Mono',monospace;text-align:center;font-size:.58rem;font-weight:700;letter-spacing:.3em;color:var(--muted);margin-top:16px;text-transform:uppercase}
 
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s,transform .55s}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
   .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="#04170b"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 6.5" fill="none" stroke="#0e7a37" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="#c93b40" stroke-width="3.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-kit" viewBox="0 0 24 24"><path d="M3.5 8.5L12 4l8.5 4.5v7L12 20l-8.5-4.5z M3.5 8.5L12 13l8.5-4.5 M12 13v7" fill="none" stroke="#0e7a37" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-app" viewBox="0 0 24 24"><rect x="6.5" y="3" width="11" height="18" rx="3" fill="none" stroke="#0e7a37" stroke-width="1.7"/><path d="M10.5 5.5h3" stroke="#0e7a37" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="17.5" r="1.15" fill="#0e7a37"/></symbol>
+    <symbol id="i-pix" viewBox="0 0 24 24"><path d="M12 3l3.8 3.8h1.4a3 3 0 012.1.9l1.9 1.9a2 2 0 010 2.8l-1.9 1.9a3 3 0 01-2.1.9h-1.4L12 21l-3.8-3.8H6.8a3 3 0 01-2.1-.9l-1.9-1.9a2 2 0 010-2.8l1.9-1.9a3 3 0 012.1-.9h1.4z" fill="none" stroke="#0e7a37" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12" r="2" fill="none" stroke="#0e7a37" stroke-width="1.6"/></symbol>
+    <symbol id="i-dish" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2" fill="none" stroke="#4ade80" stroke-width="1.6"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="#4ade80" stroke-width="1.6"/></symbol>
+    <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8 4.5L4 8l2.2 2.6L8 9.5V19.5h8V9.5l1.8 1.1L20 8l-4-3.5c-1 1.2-2.4 1.8-4 1.8s-3-.6-4-1.8z" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-paw" viewBox="0 0 24 24"><circle cx="7.2" cy="9" r="1.9" fill="#4ade80"/><circle cx="12" cy="7" r="1.9" fill="#4ade80"/><circle cx="16.8" cy="9" r="1.9" fill="#4ade80"/><path d="M12 11.5c-2.8 0-5 2.2-5 4.6 0 1.4 1.1 2.4 2.5 2.4 1 0 1.7-.5 2.5-.5s1.5.5 2.5.5c1.4 0 2.5-1 2.5-2.4 0-2.4-2.2-4.6-5-4.6z" fill="#4ade80"/></symbol>
+    <symbol id="i-brush" viewBox="0 0 24 24"><path d="M4 20c2.5 0 4-1.2 4-3.4L18.5 6a1.8 1.8 0 00-2.5-2.5L5.4 14c-2.2 0-3.4 1.5-3.4 4 0 .8-.4 1.4-1 2h3z" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M4.5 13l1.6-4.4A2 2 0 018 7.2h8a2 2 0 011.9 1.4L19.5 13M4.5 13h15M4.5 13v4.4a1 1 0 001 1h1.2a1 1 0 001-1V16.5h8.6v.9a1 1 0 001 1h1.2a1 1 0 001-1V13" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="14.7" r=".9" fill="#4ade80"/><circle cx="16" cy="14.7" r=".9" fill="#4ade80"/></symbol>
+    <symbol id="i-plant" viewBox="0 0 24 24"><path d="M12 21v-8M12 13c0-3.6 2.6-6.5 6.5-6.5.1 3.8-2.7 6.5-6.5 6.5zM12 10.5C12 7.5 9.9 5 6.5 5c-.1 3.2 2.3 5.5 5.5 5.5z" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 21h9" stroke="#4ade80" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M4 7.5h16v3H4zM5.5 10.5h13V19a1.5 1.5 0 01-1.5 1.5H7A1.5 1.5 0 015.5 19zM10 13.8h4" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
 <div class="topbar"><div class="in">
-  <div class="brand"><span class="mark">▶</span> Filmou. Ganhou.</div>
+  <div class="brand"><span class="mark"><svg><use href="#i-play"/></svg></span> Filmou. Ganhou.</div>
+  <div class="live"><i></i> Pagando via PIX</div>
   <a class="toplink" href="https://ai.hub.xyz/r/9EYQCS30" data-go>Começar</a>
 </div></div>
 
-<div class="wrap">
-  <div class="panel hero">
-    <h1>Você já faz isso de graça.<br><span class="g">Agora tem quem pague.</span></h1>
-    <p class="sub">Lavar a louça. Dobrar roupa. Passear com o cachorro. Uma startup de IA americana — <b>do Y Combinator, com escritório em São Paulo</b> — paga <b>até R$ 25 por hora aprovada</b> pra você gravar essas tarefas com o celular. Os vídeos ensinam robôs a trabalhar. O dinheiro cai <b>no seu PIX</b>.</p>
-    <a class="btn" href="https://ai.hub.xyz/r/9EYQCS30" data-go>Quero ganhar pelas minhas tarefas →
-      <small>Cadastro grátis em 2 min · Kit de gravação grátis · Se não gostar, é só não usar</small>
-    </a>
-    <a class="btn-o" href="#como">Me explica melhor primeiro</a>
-    <div class="paywith">Sem pegadinha:</div>
-    <div class="chips"><span class="chip g">PIX na conta</span><span class="chip">✗ Não é venda</span><span class="chip">✗ Não precisa aparecer</span><span class="chip">✗ R$ 0 pra entrar</span></div>
-    <div class="bot"><div class="head"><div class="visor"><i></i></div></div><div class="neck"></div><div class="torso"><b></b></div></div>
+<div class="wrap hero">
+  <div class="eyebrow"><i></i> Checado em agosto · <b>Vagas abertas no Brasil</b></div>
+  <h1>Você já faz isso de graça. <span class="g">Agora tem quem pague.</span></h1>
+  <p class="sub">Lavar a louça. Dobrar roupa. Passear com o cachorro. Uma startup de IA americana — <b>do Y Combinator, com escritório em São Paulo</b> — paga <b>até R$ 25 por hora aprovada</b> pra você gravar essas tarefas com o celular. Os vídeos ensinam robôs a trabalhar. O dinheiro cai <b>no seu PIX</b>.</p>
+  <a class="cta" href="https://ai.hub.xyz/r/9EYQCS30" data-go>Quero ganhar pelas minhas tarefas →
+    <small>Cadastro grátis em 2 min · Kit de gravação grátis · Se não gostar, é só não usar</small>
+  </a>
+  <a class="cta-o" href="#como">Me explica melhor primeiro</a>
+  <div class="objections">
+    <span class="obj yes"><svg><use href="#i-pix"/></svg> PIX na conta</span>
+    <span class="obj"><svg><use href="#i-x"/></svg> Não é venda</span>
+    <span class="obj"><svg><use href="#i-x"/></svg> Não precisa aparecer</span>
+    <span class="obj"><svg><use href="#i-x"/></svg> R$ 0 pra entrar</span>
+  </div>
+</div>
+
+<div class="stage" id="stage">
+  <div class="stage-glow"></div>
+  <div class="phone" id="phone">
+    <div class="screen">
+      <div class="island"><i></i><i></i></div>
+      <div class="s-top"><span>09:41</span><span>Hoje · 3 tarefas</span></div>
+      <div class="s-hello">Olá, Ana</div>
+      <div class="s-task">
+        <div class="r1"><span>Lavar a louça</span><span class="price">R$ 25/h</span></div>
+        <div class="r2">Cozinha · ~20 min · luz natural</div>
+        <div class="rec"><i></i> GRAVANDO <span class="bar"><b></b></span> 00:47</div>
+      </div>
+      <div class="s-pay">
+        <div class="lab"><span>SALDO DISPONÍVEL</span><span class="paid">PAGO ✓</span></div>
+        <div class="val" id="saldo">R$ 0,00</div>
+        <div class="nxt">Saque via PIX · cai em poucas horas</div>
+      </div>
+      <div class="feed" id="feed"></div>
+    </div>
+  </div>
+  <div class="bot-wrap">
+    <svg viewBox="0 0 200 258" fill="none">
+      <defs>
+        <linearGradient id="rg1" x1="40" y1="10" x2="160" y2="150"><stop offset="0" stop-color="#3a4442"/><stop offset=".55" stop-color="#1b2220"/><stop offset="1" stop-color="#0e1312"/></linearGradient>
+        <linearGradient id="rg2" x1="30" y1="180" x2="170" y2="258"><stop offset="0" stop-color="#2c3533"/><stop offset="1" stop-color="#131917"/></linearGradient>
+        <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+      </defs>
+      <rect x="38" y="8" width="124" height="150" rx="56" fill="url(#rg1)"/>
+      <rect x="40" y="10" width="120" height="70" rx="52" fill="#ffffff" opacity=".06"/>
+      <rect x="24" y="62" width="12" height="42" rx="6" fill="#1b2220"/>
+      <rect x="164" y="62" width="12" height="42" rx="6" fill="#1b2220"/>
+      <rect x="58" y="64" width="84" height="38" rx="19" fill="#05090a"/>
+      <rect x="70" y="80" width="60" height="5.5" rx="2.75" fill="#22c55e" filter="url(#soft)" opacity=".85"/>
+      <rect x="70" y="80" width="60" height="5.5" rx="2.75" fill="#4ade80">
+        <animate attributeName="width" values="60;10;60;60" keyTimes="0;.46;.52;1" dur="3.6s" repeatCount="indefinite"/>
+        <animate attributeName="x" values="70;95;70;70" keyTimes="0;.46;.52;1" dur="3.6s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="88" y="158" width="24" height="16" rx="7" fill="#131917"/>
+      <rect x="30" y="172" width="140" height="86" rx="34" fill="url(#rg2)"/>
+      <rect x="32" y="174" width="136" height="40" rx="30" fill="#ffffff" opacity=".05"/>
+      <circle cx="100" cy="206" r="7" fill="#22c55e"><animate attributeName="opacity" values="1;.45;1" dur="2.4s" repeatCount="indefinite"/></circle>
+      <circle cx="100" cy="206" r="12" stroke="#22c55e" stroke-width="1.4" opacity=".3"/>
+    </svg>
   </div>
 </div>
 
 <div class="wrap reveal">
-  <section>
-    <div class="kicker">Gravando agora no Brasil</div>
-    <div class="reel">
-      <div class="tcard"><div class="th g1">🧽</div><div class="lb"><b>Lavar a louça</b>📍 São Paulo, BR</div></div>
-      <div class="tcard"><div class="th g2">🧺</div><div class="lb"><b>Dobrar roupas</b>📍 Porto Alegre, BR</div></div>
-      <div class="tcard"><div class="th g3">🐕</div><div class="lb"><b>Passear com o cachorro</b>📍 Brasília, BR</div></div>
-      <div class="tcard"><div class="th g4">🎨</div><div class="lb"><b>Pintar paredes</b>📍 Salvador, BR</div></div>
-      <div class="tcard"><div class="th g5">🚗</div><div class="lb"><b>Lavar o carro</b>📍 Curitiba, BR</div></div>
-      <div class="tcard"><div class="th g6">📦</div><div class="lb"><b>Organizar prateleiras</b>📍 Manaus, BR</div></div>
-    </div>
-  </section>
+  <div class="metrics">
+    <div class="metric"><div class="n" data-count="25" data-prefix="R$ ">R$ 0</div><div class="l">por hora aprovada</div></div>
+    <div class="metric"><div class="n" data-count="48" data-suffix="h">0h</div><div class="l">prazo máx. revisão</div></div>
+    <div class="metric"><div class="n" data-count="70" data-suffix="+">0+</div><div class="l">tarefas aceitas</div></div>
+    <div class="metric"><div class="n">PIX</div><div class="l">saque a partir de ~R$ 30</div></div>
+  </div>
 </div>
 
 <div class="wrap reveal" id="como">
@@ -208,39 +293,26 @@
     <div class="kicker">Como funciona</div>
     <h2>Do cadastro ao PIX em 3 passos</h2>
     <p class="lead">Sem vender, sem recrutar ninguém, sem investir um real. Seu único trabalho é fazer o que você já faz — com a câmera ligada.</p>
-    <div class="feat"><div class="fic">📦</div><div><h3>1 · Cadastre-se e peça o kit grátis</h3><p>Uma faixa de cabeça com suporte de celular chega na sua casa. Você não paga nem o frete.</p></div></div>
-    <div class="feat"><div class="fic">📲</div><div><h3>2 · Abra o app e escolha uma tarefa</h3><p>Lavar louça? Dobrar roupa? Escolhe a tarefa, prende o celular na testa e aperta gravar. O valor aparece antes de você começar.</p></div></div>
-    <div class="feat"><div class="fic">💸</div><div><h3>3 · Envie e veja o saldo subir</h3><p>Revisão em até 48h. Aprovou, virou dinheiro. Saque via PIX que cai em poucas horas — a partir de ~R$ 30 de saldo.</p></div></div>
+    <div class="step"><div class="snum"><svg><use href="#i-kit"/></svg></div><div><h3>1 · Cadastre-se e peça o kit grátis</h3><p>Uma faixa de cabeça com suporte de celular chega na sua casa. Você não paga nem o frete.</p></div></div>
+    <div class="step"><div class="snum"><svg><use href="#i-app"/></svg></div><div><h3>2 · Abra o app e escolha uma tarefa</h3><p>Lavar louça? Dobrar roupa? Escolhe a tarefa, prende o celular na testa e aperta gravar. O valor aparece antes de você começar.</p></div></div>
+    <div class="step"><div class="snum"><svg><use href="#i-pix"/></svg></div><div><h3>3 · Envie e veja o saldo subir</h3><p>Revisão em até 48h. Aprovou, virou dinheiro. Saque via PIX que cai em poucas horas — a partir de ~R$ 30 de saldo.</p></div></div>
   </section>
 </div>
 
 <div class="wrap reveal">
   <section>
-    <div class="kicker">O app</div>
-    <h2>Cada minuto aprovado vira saldo</h2>
-    <p class="lead">Você acompanha tudo na tela: quanto já ganhou, quanto está em revisão e quando pode sacar. Nada de "confia em mim" — o número está ali.</p>
+    <div class="kicker">Gravando agora no Brasil</div>
+    <h2>Tarefas que você já faz todo dia</h2>
+    <div class="reel">
+      <div class="tcard"><div class="th"><svg><use href="#i-dish"/></svg></div><div class="lb"><b>Lavar a louça</b><span>São Paulo · BR</span></div></div>
+      <div class="tcard"><div class="th"><svg><use href="#i-shirt"/></svg></div><div class="lb"><b>Dobrar roupas</b><span>Porto Alegre · BR</span></div></div>
+      <div class="tcard"><div class="th"><svg><use href="#i-paw"/></svg></div><div class="lb"><b>Passear com o pet</b><span>Brasília · BR</span></div></div>
+      <div class="tcard"><div class="th"><svg><use href="#i-brush"/></svg></div><div class="lb"><b>Pintar paredes</b><span>Salvador · BR</span></div></div>
+      <div class="tcard"><div class="th"><svg><use href="#i-car"/></svg></div><div class="lb"><b>Lavar o carro</b><span>Curitiba · BR</span></div></div>
+      <div class="tcard"><div class="th"><svg><use href="#i-plant"/></svg></div><div class="lb"><b>Cuidar do quintal</b><span>Belém · BR</span></div></div>
+      <div class="tcard"><div class="th"><svg><use href="#i-box"/></svg></div><div class="lb"><b>Organizar prateleiras</b><span>Manaus · BR</span></div></div>
+    </div>
   </section>
-</div>
-<div class="phone-wrap reveal">
-  <div class="phone"><div class="screen">
-    <div class="notch"></div>
-    <div class="s-row"><span>9:41</span><span>Hoje · 3 tarefas</span></div>
-    <div class="s-hello">Olá, Ana</div>
-    <div class="s-card">
-      <div class="t"><span>Lavar a louça</span><span class="price">R$ 25/h</span></div>
-      <div class="d">Cozinha · ~20 min · luz natural</div>
-      <div class="s-rec"><span class="r"></span> Gravando <div class="s-bar"><i></i></div> 0:47</div>
-    </div>
-    <div class="s-card">
-      <div class="t"><span>Dobrar roupas</span><span class="price">R$ 25/h</span></div>
-      <div class="d">Lavanderia · ~15 min</div>
-    </div>
-    <div class="s-pay">
-      <div class="lab"><span>SALDO DISPONÍVEL</span><span>PAGO ✓</span></div>
-      <div class="val">R$ 128,40</div>
-      <div class="nxt">Saque via PIX · cai em poucas horas</div>
-    </div>
-  </div></div>
 </div>
 
 <div class="wrap reveal">
@@ -250,13 +322,13 @@
     <p class="lead">Sem papo de guru: criadores independentes gravaram a tela com os valores reais — incluindo o saldo e o saque.</p>
     <div class="vid">
       <iframe loading="lazy" src="https://www.youtube.com/embed/9Ka1SxHDJw0" title="Renda extra gravando a rotina" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <div class="cap"><b>Renda extra gravando a rotina</b> · review independente mostrando as tarefas e os valores</div>
+      <div class="cap"><span class="tag">PROVA REAL</span><span><b>Renda extra gravando a rotina</b> — as tarefas, os valores e o painel na tela</span></div>
     </div>
     <div class="vid">
-      <iframe loading="lazy" src="https://www.youtube.com/embed/S5AQuBaGcp4" title="Guia da plataforma Hub" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <div class="cap"><b>Guia completo da plataforma</b> · passo a passo de como funciona por dentro</div>
+      <iframe loading="lazy" src="https://www.youtube.com/embed/S5AQuBaGcp4" title="Guia da plataforma" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="cap"><span class="tag">GUIA</span><span><b>Como funciona por dentro</b> — do cadastro à gravação, passo a passo</span></div>
     </div>
-    <a class="btn" href="https://ai.hub.xyz/r/9EYQCS30" data-go>Quero ver meu painel assim →
+    <a class="cta" href="https://ai.hub.xyz/r/9EYQCS30" data-go>Quero ver meu painel assim →
       <small>Cadastro grátis em 2 minutos pelo site oficial</small>
     </a>
   </section>
@@ -267,7 +339,7 @@
     <div class="kicker">Faça a conta da sua rotina</div>
     <h2>Quanto suas tarefas valem por mês?</h2>
     <p class="lead">Pensa na sua rotina de hoje: louça, roupa, faxina, pets. Quantas horas disso você já faz por dia?</p>
-    <div class="panel calc">
+    <div class="calc">
       <div class="hours">Gravando <b id="h">2</b> hora(s) por dia do que você já faz:</div>
       <input type="range" min="1" max="6" value="2" id="slider">
       <div class="result" id="result">R$ 1.500/mês</div>
@@ -280,16 +352,14 @@
   <section>
     <div class="kicker">Conversa direta</div>
     <h2>Antes de entrar, veja se é pra você</h2>
-    <p class="lead">A gente prefere te contar tudo agora do que você descobrir depois. Se você se encaixa nos ✓, pode entrar tranquilo.</p>
-    <div class="panel">
-      <ul class="req">
-        <li><span class="ok">✓</span><b>Celular compatível:</b> iPhone 12+ ou Samsung S21+ (câmera boa é obrigatória)</li>
-        <li><span class="ok">✓</span>Morar nas Américas (Brasil incluído) — a localização é verificada</li>
-        <li><span class="ok">✓</span>Gravar tarefas reais, do começo ao fim, com boa iluminação</li>
-        <li><span class="no">✗</span>VPN não funciona (e pode dar banimento)</li>
-        <li><span class="no">✗</span>Tarefa encenada, câmera tremida ou escuro = vídeo rejeitado</li>
-      </ul>
-    </div>
+    <p class="lead">A gente prefere te contar tudo agora do que você descobrir depois.</p>
+    <ul class="reqbox">
+      <li><span class="ric y"><svg><use href="#i-check"/></svg></span><span><b>Celular compatível:</b> iPhone 12+ ou Samsung S21+ (câmera boa é obrigatória)</span></li>
+      <li><span class="ric y"><svg><use href="#i-check"/></svg></span><span>Morar nas Américas (Brasil incluído) — a localização é verificada</span></li>
+      <li><span class="ric y"><svg><use href="#i-check"/></svg></span><span>Gravar tarefas reais, do começo ao fim, com boa iluminação</span></li>
+      <li><span class="ric n"><svg><use href="#i-x"/></svg></span><span>VPN não funciona (e pode dar banimento)</span></li>
+      <li><span class="ric n"><svg><use href="#i-x"/></svg></span><span>Tarefa encenada, câmera tremida ou escuro = vídeo rejeitado</span></li>
+    </ul>
   </section>
 </div>
 
@@ -297,24 +367,24 @@
   <section>
     <div class="kicker">Pode perguntar</div>
     <h2>As dúvidas que seguram todo mundo</h2>
-    <details><summary>Isso é verdade? Paga mesmo?</summary><div class="a">É a pergunta certa — nesse mercado tem muito golpe. Por isso a gente checou antes de indicar: a empresa se chama Hub, é uma startup de IA acelerada pelo <b>Y Combinator</b> (a mesma aceleradora do Airbnb e da Stripe), tem fundadores públicos, sede em San Francisco e escritório em São Paulo. Sites independentes de renda extra testaram, receberam via PIX e publicaram a prova — e os vídeos aqui em cima mostram o painel aberto. A regra de ouro: <b>golpe cobra pra entrar. Aqui é R$ 0.</b></div></details>
-    <details><summary>Por que uma empresa pagaria por algo tão simples?</summary><div class="a">Porque robô não aprende sozinho. As empresas de robótica precisam de milhares de horas de vídeo em primeira pessoa — gente REAL lavando louça em cozinha REAL — pra ensinar as máquinas. Esse vídeo não existe pronto na internet, então elas pagam quem grava. É o mercado de dados de IA, que movimenta bilhões por ano. Sua rotina comum é exatamente o que eles não têm.</div></details>
-    <details><summary>Quando e como eu recebo?</summary><div class="a">Cada vídeo passa por revisão de qualidade (até 48h). Aprovou, o valor entra no saldo na hora. Aí é só sacar via PIX ou transferência, a partir de ~R$ 30 — o PIX costuma cair em poucas horas.</div></details>
-    <details><summary>Preciso aparecer ou mostrar meu rosto?</summary><div class="a">Não. A câmera fica presa na sua testa apontando pra FRENTE — o vídeo mostra suas mãos fazendo a tarefa, não você. Ninguém da sua família precisa aparecer, e você não publica nada em rede social.</div></details>
-    <details><summary>Tem algum custo escondido? Mensalidade?</summary><div class="a">Zero. Cadastro grátis, kit grátis (nem frete você paga), sem mensalidade, sem "taxa de ativação". Se em algum momento alguém te pedir dinheiro pra "liberar" alguma coisa, desconfia — não é assim que funciona.</div></details>
-    <a class="btn" href="https://ai.hub.xyz/r/9EYQCS30" data-go>Tirei minhas dúvidas — quero começar →
+    <details><summary>Isso é verdade? Paga mesmo? <span class="pl"></span></summary><div class="a">É a pergunta certa — nesse mercado tem muito golpe. Por isso a gente checou antes de indicar: a empresa se chama Hub, é uma startup de IA acelerada pelo <b>Y Combinator</b> (a mesma aceleradora do Airbnb e da Stripe), tem fundadores públicos, sede em San Francisco e escritório em São Paulo. Sites independentes de renda extra testaram, receberam via PIX e publicaram a prova — e os vídeos aqui em cima mostram o painel aberto. A regra de ouro: <b>golpe cobra pra entrar. Aqui é R$ 0.</b></div></details>
+    <details><summary>Por que uma empresa pagaria por algo tão simples? <span class="pl"></span></summary><div class="a">Porque robô não aprende sozinho. As empresas de robótica precisam de milhares de horas de vídeo em primeira pessoa — gente REAL lavando louça em cozinha REAL — pra ensinar as máquinas. Esse vídeo não existe pronto na internet, então elas pagam quem grava. É o mercado de dados de IA, que movimenta bilhões por ano. Sua rotina comum é exatamente o que eles não têm.</div></details>
+    <details><summary>Quando e como eu recebo? <span class="pl"></span></summary><div class="a">Cada vídeo passa por revisão de qualidade (até 48h). Aprovou, o valor entra no saldo na hora. Aí é só sacar via PIX ou transferência, a partir de ~R$ 30 — o PIX costuma cair em poucas horas.</div></details>
+    <details><summary>Preciso aparecer ou mostrar meu rosto? <span class="pl"></span></summary><div class="a">Não. A câmera fica presa na sua testa apontando pra FRENTE — o vídeo mostra suas mãos fazendo a tarefa, não você. Ninguém da sua família precisa aparecer, e você não publica nada em rede social.</div></details>
+    <details><summary>Tem algum custo escondido? Mensalidade? <span class="pl"></span></summary><div class="a">Zero. Cadastro grátis, kit grátis (nem frete você paga), sem mensalidade, sem "taxa de ativação". Se em algum momento alguém te pedir dinheiro pra "liberar" alguma coisa, desconfia — não é assim que funciona.</div></details>
+    <a class="cta" href="https://ai.hub.xyz/r/9EYQCS30" data-go>Tirei minhas dúvidas — quero começar →
       <small>2 minutos. Você vai pro site oficial e volta aqui pro passo a passo.</small>
     </a>
   </section>
 </div>
 
 <footer>
-  <div class="wrap"><div class="panel">
+  <div class="wrap"><div class="fbox">
     <p><b>Transparência:</b> esta página usa link de indicação. Se você se cadastrar por aqui, podemos receber uma comissão da plataforma — sem custo nenhum a mais pra você. Indicamos porque a empresa é verificável e há provas públicas de pagamento.</p>
-    <p><b>Aviso de ganhos:</b> os valores citados são a taxa por hora aprovada divulgada pela plataforma. Não há garantia de renda: os ganhos dependem da disponibilidade de tarefas, da qualidade das gravações e da aprovação na revisão.</p>
+    <p><b>Aviso de ganhos:</b> os valores citados são a taxa por hora aprovada divulgada pela plataforma. Não há garantia de renda: os ganhos dependem da disponibilidade de tarefas, da qualidade das gravações e da aprovação na revisão. A tela de app exibida é uma simulação ilustrativa.</p>
     <p><b>Vídeos:</b> os vídeos exibidos são de criadores independentes e pertencem aos seus autores; não representam garantia de resultado.</p>
     <p>Página independente — não pertence à Hub. © 2026 · Filmou. Ganhou.</p>
-    <div class="follow">FEITO NO BRASIL</div>
+    <div class="madein">Feito no Brasil</div>
   </div></div>
 </footer>
 
@@ -323,8 +393,7 @@
 </div>
 
 <script>
-  // CTA: abre o cadastro oficial (com o código de indicação) em nova aba
-  // e leva o lead pra página de próximos passos com os tutoriais
+  // CTA: abre o cadastro oficial em nova aba + leva o lead pros próximos passos
   document.querySelectorAll('[data-go]').forEach(a=>{
     a.addEventListener('click',e=>{
       e.preventDefault();
@@ -333,14 +402,52 @@
     });
   });
 
+  // Calculadora
   const slider=document.getElementById('slider'),h=document.getElementById('h'),result=document.getElementById('result');
-  slider&&slider.addEventListener('input',()=>{h.textContent=slider.value;result.textContent='R$ '+(slider.value*25*30).toLocaleString('pt-BR')+'/mês';});
+  slider.addEventListener('input',()=>{h.textContent=slider.value;result.textContent='R$ '+(slider.value*25*30).toLocaleString('pt-BR')+'/mês';});
 
+  // Sticky CTA
   const sticky=document.getElementById('sticky'),hero=document.querySelector('.hero');
   new IntersectionObserver(e=>{sticky.classList.toggle('show',!e[0].isIntersecting)},{threshold:0}).observe(hero);
 
+  // Reveal on scroll
   const obs=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target)}}),{threshold:.07});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  // Saldo: contador animado quando o celular entra na tela
+  const saldo=document.getElementById('saldo');
+  const animSaldo=()=>{const T=128.40,D=1400,t0=performance.now();
+    const tick=t=>{const p=Math.min(1,(t-t0)/D),e=1-Math.pow(1-p,3);
+      saldo.textContent='R$ '+(T*e).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+      if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)};
+  new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){animSaldo();o.disconnect()}},{threshold:.4}).observe(saldo);
+
+  // Métricas: contadores
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    new IntersectionObserver((e,o)=>{if(!e[0].isIntersecting)return;o.disconnect();
+      const T=+el.dataset.count,P=el.dataset.prefix||'',S=el.dataset.suffix||'',t0=performance.now();
+      const tick=t=>{const p=Math.min(1,(t-t0)/1100),ease=1-Math.pow(1-p,3);
+        el.textContent=P+Math.round(T*ease)+S;if(p<1)requestAnimationFrame(tick)};
+      requestAnimationFrame(tick);},{threshold:.5}).observe(el);
+  });
+
+  // Feed de aprovações (simulação ilustrativa)
+  const F=[["Marcos","Recife","Lavar o carro","9,80"],["Juliana","Curitiba","Dobrar roupas","6,20"],["Ana","São Paulo","Lavar a louça","12,50"],["Pedro","Salvador","Pintar parede","18,30"],["Camila","Manaus","Organizar prateleira","7,40"],["Rafa","Brasília","Passear com o pet","5,90"],["Lívia","Belém","Cuidar do quintal","11,10"]];
+  const feed=document.getElementById('feed');let fi=0;
+  const addF=()=>{const[nome,cid,tar,val]=F[fi++%F.length];
+    const d=document.createElement('div');d.className='fitem';
+    d.innerHTML=`<span class="chk"><svg><use href="#i-check"/></svg></span><span><b>${nome}</b> · ${cid} — ${tar}</span><span class="amt">+R$ ${val}</span>`;
+    feed.prepend(d);while(feed.children.length>3)feed.lastChild.remove();};
+  addF();addF();addF();setInterval(addF,2700);
+
+  // Tilt 3D no celular (desktop)
+  const phone=document.getElementById('phone'),stage=document.getElementById('stage');
+  if(matchMedia('(pointer:fine)').matches){
+    stage.addEventListener('mousemove',e=>{
+      const r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      phone.style.transform=`rotateY(${x*7}deg) rotateX(${-y*5}deg)`;});
+    stage.addEventListener('mouseleave',()=>phone.style.transform='');
+  }
 </script>
 </body>
 </html>
