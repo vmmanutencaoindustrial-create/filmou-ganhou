@@ -310,12 +310,8 @@
     <div class="proof-grid">
       <div class="yt-card"><div class="yt" data-id="a_xf1bgtDE0"><img loading="lazy" src="https://i.ytimg.com/vi/a_xf1bgtDE0/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"Testei! App pagando R$ 20/h"</b><span>Will Além do Salário</span></div></div>
       <div class="yt-card"><div class="yt" data-id="p3pV2PDHweg"><img loading="lazy" src="https://i.ytimg.com/vi/p3pV2PDHweg/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"Quanto recebi do app?"</b><span>Will Além do Salário</span></div></div>
-      <div class="yt-card"><div class="yt" data-id="2yaxj9XKQ_k"><img loading="lazy" src="https://i.ytimg.com/vi/2yaxj9XKQ_k/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"Saques aprovados na tela"</b><span>Alexandre Lemes</span></div></div>
-      <div class="yt-card"><div class="yt" data-id="ho-DvNBF65s"><img loading="lazy" src="https://i.ytimg.com/vi/ho-DvNBF65s/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"R$ 20/h treinando IA? Testei"</b><span>VascoCripto</span></div></div>
       <div class="yt-card"><div class="yt" data-id="37IH47ABri0"><img loading="lazy" src="https://i.ytimg.com/vi/37IH47ABri0/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"R$ 30/h sem aparecer"</b><span>Manual da Sabrina</span></div></div>
-      <div class="yt-card"><div class="yt" data-id="s-V_TLOLCig"><img loading="lazy" src="https://i.ytimg.com/vi/s-V_TLOLCig/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"Meu kit chegou — unboxing"</b><span>Influencer de Milhões</span></div></div>
-      <div class="yt-card"><div class="yt" data-id="OxkOM9qxn1M"><img loading="lazy" src="https://i.ytimg.com/vi/OxkOM9qxn1M/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"R$ 25-30/h: cadastro + dicas"</b><span>Engenheiro do Lucro</span></div></div>
-      <div class="yt-card"><div class="yt" data-id="QMuEBNbEQs4"><img loading="lazy" src="https://i.ytimg.com/vi/QMuEBNbEQs4/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"Como estou ganhando — vlog 13"</b><span>Will Além do Salário</span></div></div>
+      <div class="yt-card"><div class="yt" data-id="OxkOM9qxn1M"><img loading="lazy" src="https://i.ytimg.com/vi/OxkOM9qxn1M/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"R$ 25-30/h na prática"</b><span>Engenheiro do Lucro</span></div></div>
     </div>
     <p class="proof-note">Vídeos de criadores independentes, exibidos via player público do YouTube. Cada um pertence ao seu autor e mostra a experiência pessoal dele — não é garantia de resultado.</p>
 
@@ -410,13 +406,24 @@
 
 <script>
   // Facade dos vídeos: thumbnail leve → player no clique (nocookie, sem fullscreen,
-  // com escudos cobrindo título e logo pra ninguém sair da página pelo player)
+  // escudos sobre título/logo). Ao TERMINAR, o player some e volta o cartão com CTA —
+  // as sugestões de fim de vídeo do YouTube nunca aparecem.
+  let ytApiReady=null;
+  const loadYT=()=>ytApiReady||(ytApiReady=new Promise(res=>{
+    window.onYouTubeIframeAPIReady=()=>res(window.YT);
+    const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s);
+  }));
   document.querySelectorAll('.yt').forEach(el=>{
-    el.addEventListener('click',()=>{
-      if(el.querySelector('iframe'))return;
-      const id=el.dataset.id;
-      el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1&iv_load_policy=3&fs=0" title="Vídeo de prova social" allow="autoplay; encrypted-media"></iframe>'+
-        '<span class="shield top"></span><span class="shield br"></span>';
+    const facade=el.innerHTML;
+    el.addEventListener('click',async()=>{
+      if(el.dataset.on)return;el.dataset.on='1';
+      const id=el.dataset.id,YT=await loadYT();
+      const holder=document.createElement('div');
+      el.innerHTML='';el.appendChild(holder);
+      el.insertAdjacentHTML('beforeend','<span class="shield top"></span><span class="shield br"></span>');
+      new YT.Player(holder,{host:'https://www.youtube-nocookie.com',videoId:id,
+        playerVars:{autoplay:1,rel:0,playsinline:1,iv_load_policy:3,fs:0},
+        events:{onStateChange:e=>{if(e.data===YT.PlayerState.ENDED){e.target.destroy();el.innerHTML=facade;delete el.dataset.on;}}}});
     });
   });
 
