@@ -69,7 +69,7 @@
   /* ============ PHONE + ROBOT STAGE ============ */
   .stage{position:relative;padding:44px 0 10px;perspective:1200px}
   .stage-glow{position:absolute;inset:auto 0 -8%;height:70%;background:radial-gradient(60% 80% at 50% 100%,rgba(34,197,94,.13),transparent 70%);pointer-events:none}
-  .phone{width:min(330px,84vw);margin:0 auto;background:linear-gradient(160deg,#232a28,#101514 55%);border-radius:46px;padding:12px;box-shadow:0 46px 90px -34px rgba(16,21,20,.55),inset 0 1px 0 rgba(255,255,255,.14);position:relative;transform-style:preserve-3d;transition:transform .25s ease-out;animation:float 6.5s ease-in-out infinite}
+  .phone{width:min(330px,84vw);margin:0 auto;background:linear-gradient(160deg,#232a28,#101514 55%);border-radius:46px;padding:12px;box-shadow:0 46px 90px -34px rgba(16,21,20,.55),inset 0 1px 0 rgba(255,255,255,.14);position:relative;z-index:1;transform-style:preserve-3d;transition:transform .25s ease-out;animation:float 6.5s ease-in-out infinite}
   @keyframes float{0%,100%{translate:0 0}50%{translate:0 -9px}}
   .screen{background:#f4f5f2;border-radius:36px;overflow:hidden;padding:18px 15px 16px;position:relative}
   .island{width:96px;height:26px;background:#101514;border-radius:16px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -102,8 +102,9 @@
   .fitem .amt{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--green-deep);white-space:nowrap}
   .sim-note{text-align:center;font-size:.62rem;color:var(--muted);opacity:.75;margin-top:10px}
   /* robô ao lado */
-  .bot-wrap{position:absolute;right:max(8px,calc(50% - 320px));bottom:22px;width:108px;pointer-events:none;animation:float 7.5s ease-in-out infinite reverse;filter:drop-shadow(0 22px 26px rgba(16,21,20,.3))}
-  @media(max-width:760px){.bot-wrap{display:none}}
+  .bot-wrap{position:absolute;right:max(8px,calc(50% - 320px));bottom:22px;width:108px;z-index:0;pointer-events:none;animation:float 7.5s ease-in-out infinite reverse;filter:drop-shadow(0 22px 26px rgba(16,21,20,.3))}
+  .bot-wrap svg{transform:rotate(8deg)}
+  @media(max-width:760px){.bot-wrap{width:88px;right:max(2px,calc(50% - 205px));bottom:34px}}
 
   /* ============ METRICS ============ */
   .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:30px}
