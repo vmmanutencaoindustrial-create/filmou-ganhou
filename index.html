@@ -303,7 +303,7 @@
       <div class="yt-cap"><b>"16 HORAS testando a IA que PAGA por tarefas de casa"</b><span>ForaDoPadrão · 11 mil visualizações</span></div>
     </div>
     <div class="proof-hero yt-card">
-      <div class="yt" data-id="9Ka1SxHDJw0"><img loading="lazy" src="https://i.ytimg.com/vi/9Ka1SxHDJw0/hqdefault.jpg" alt="R$20 por hora"><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div>
+      <div class="yt" data-id="9Ka1SxHDJw0"><img loading="lazy" src="https://i.ytimg.com/vi/9Ka1SxHDJw0/hq2.jpg" alt="R$20 por hora"><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div>
       <div class="yt-cap"><b>"R$ 20 por hora gravando sua rotina" — com o painel de ganhos aberto</b><span>0xPlayer · review independente</span></div>
     </div>
 
@@ -311,7 +311,7 @@
       <div class="yt-card"><div class="yt" data-id="a_xf1bgtDE0"><img loading="lazy" src="https://i.ytimg.com/vi/a_xf1bgtDE0/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"Testei! App pagando R$ 20/h"</b><span>Will Além do Salário</span></div></div>
       <div class="yt-card"><div class="yt" data-id="p3pV2PDHweg"><img loading="lazy" src="https://i.ytimg.com/vi/p3pV2PDHweg/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"Quanto recebi do app?"</b><span>Will Além do Salário</span></div></div>
       <div class="yt-card"><div class="yt" data-id="37IH47ABri0"><img loading="lazy" src="https://i.ytimg.com/vi/37IH47ABri0/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"R$ 30/h sem aparecer"</b><span>Manual da Sabrina</span></div></div>
-      <div class="yt-card"><div class="yt" data-id="OxkOM9qxn1M"><img loading="lazy" src="https://i.ytimg.com/vi/OxkOM9qxn1M/hqdefault.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"R$ 25-30/h na prática"</b><span>Engenheiro do Lucro</span></div></div>
+      <div class="yt-card"><div class="yt" data-id="OxkOM9qxn1M"><img loading="lazy" src="https://i.ytimg.com/vi/OxkOM9qxn1M/hq2.jpg" alt=""><div class="pb"><i><svg><use href="#i-playw"/></svg></i></div></div><div class="yt-cap"><b>"R$ 25-30/h na prática"</b><span>Engenheiro do Lucro</span></div></div>
     </div>
     <p class="proof-note">Vídeos de criadores independentes, exibidos via player público do YouTube. Cada um pertence ao seu autor e mostra a experiência pessoal dele — não é garantia de resultado.</p>
 
@@ -421,7 +421,7 @@
       const holder=document.createElement('div');
       el.innerHTML='';el.appendChild(holder);
       el.insertAdjacentHTML('beforeend','<span class="shield top"></span><span class="shield br"></span>');
-      new YT.Player(holder,{host:'https://www.youtube-nocookie.com',videoId:id,
+      new YT.Player(holder,{videoId:id,
         playerVars:{autoplay:1,rel:0,playsinline:1,iv_load_policy:3,fs:0},
         events:{onStateChange:e=>{if(e.data===YT.PlayerState.ENDED){e.target.destroy();el.innerHTML=facade;delete el.dataset.on;}}}});
     });
