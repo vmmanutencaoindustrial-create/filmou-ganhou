@@ -556,20 +556,28 @@
   const show=f=>{if(shown||sessionStorage.getItem('xseen'))return;if(!armed&&!f)return;
     shown=true;sessionStorage.setItem('xseen','1');ov.classList.add('on');document.body.style.overflow='hidden'};
   const hide=()=>{ov.classList.remove('on');document.body.style.overflow=''};
-  document.getElementById('exitx').addEventListener('click',hide);
+  const go=id=>['xs1','xs2','xs3'].forEach(s=>document.getElementById(s).hidden=(s!==id));
+  // X e ESC descem a escada: degrau 1 -> 2 -> 3 -> só aí fecha
+  const step=()=>{
+    if(!ov.classList.contains('on'))return;
+    if(!document.getElementById('xs1').hidden)go('xs2');
+    else if(!document.getElementById('xs2').hidden)go('xs3');
+    else hide();};
+  document.getElementById('exitx').addEventListener('click',step);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')step()});
   document.getElementById('exitdone').addEventListener('click',hide);
-  document.querySelectorAll('.xnext').forEach(b=>b.addEventListener('click',()=>{
-    b.closest('.xs').hidden=true;
-    document.getElementById(b.dataset.next).hidden=false;}));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});
+  document.querySelectorAll('.xnext').forEach(b=>b.addEventListener('click',()=>go(b.dataset.next)));
   // Desktop: mouse indo fechar a aba
   document.addEventListener('mouseout',e=>{if(!e.relatedTarget&&e.clientY<=15)show()});
   // Mobile: botão voltar
-  let hashNav=false;
-  document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a){hashNav=true;setTimeout(()=>hashNav=false,300)}},true);
-  if(history.pushState){history.pushState({x:1},'');
-    addEventListener('popstate',()=>{if(hashNav)return;
-      if(!shown&&!sessionStorage.getItem('xseen')){show(true);history.pushState({x:1},'')}});}
+  let hashNav=false,trapped=false;
+  document.addEventListener('click',e=>{if(e.target.closest('a[href^="#"]')){hashNav=true;setTimeout(()=>hashNav=false,300)}},true);
+  // Trava do voltar criada SÓ após a 1ª interação — sem gesto o Chrome ignora o pushState no botão voltar
+  const trap=()=>{if(trapped)return;trapped=true;history.pushState({x:1},'')};
+  ['pointerdown','keydown','touchstart'].forEach(ev=>addEventListener(ev,trap,{once:true}));
+  addEventListener('scroll',trap,{once:true,passive:true});
+  addEventListener('popstate',()=>{if(hashNav)return;
+    if(!shown&&!sessionStorage.getItem('xseen'))show(true);});
 })();
 </script>
 </body>
