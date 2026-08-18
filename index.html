@@ -220,7 +220,7 @@
 <div class="topbar"><div class="in">
   <div class="brand"><span class="mark"><svg><use href="#i-play"/></svg></span> Filmou. Ganhou.</div>
   <div class="live"><i></i> Pagando via PIX</div>
-  <a class="toplink" href="#oferta">Quero o guia</a>
+  <a class="toplink" href="https://pay.kiwify.com.br/UjFoGP3">Quero o guia</a>
 </div></div>
 
 <div class="wrap hero">
@@ -228,7 +228,7 @@
   <h1>Você já faz isso de graça. <span class="g">Agora tem quem pague.</span></h1>
   <p class="sub">Lavar a louça. Dobrar roupa. Passear com o cachorro. Uma startup americana de IA — <b>do Y Combinator, com escritório em São Paulo</b> — paga <b>até R$ 25 por hora aprovada</b> pra você gravar essas tarefas com o celular. Os vídeos ensinam robôs a trabalhar. O dinheiro cai <b>no seu PIX</b>.</p>
   <p class="sub" style="margin-top:12px">O problema? <b>Muita gente tem os vídeos rejeitados nos primeiros dias</b> — e desiste sem receber nada. Por isso existe o método.</p>
-  <a class="cta" href="#oferta">Quero o método do primeiro PIX →
+  <a class="cta" href="https://pay.kiwify.com.br/UjFoGP3">Quero o método do primeiro PIX →
     <small>Guia completo por R$ 27 · Se paga no seu primeiro dia de tarefas</small>
   </a>
   <a class="cta-o" href="#prova">Ver quem já está fazendo</a>
@@ -323,7 +323,7 @@
     </div>
     <p class="proof-note">Vídeos de criadores independentes, exibidos via player público do YouTube. Cada um pertence ao seu autor e mostra a experiência pessoal dele — valores variam por tarefa e plataforma, e não são garantia de resultado.</p>
 
-    <a class="cta" href="#oferta">Ok, é real. Como eu começo certo? →
+    <a class="cta" href="https://pay.kiwify.com.br/UjFoGP3">Ok, é real. Como eu começo certo? →
       <small>O método completo está no guia — R$ 27</small>
     </a>
   </section>
@@ -408,7 +408,7 @@
 </footer>
 
 <div class="sticky" id="sticky">
-  <a href="#oferta">Quero o método por R$ 27 → se paga no 1º dia</a>
+  <a href="https://pay.kiwify.com.br/UjFoGP3">Quero o método por R$ 27 → se paga no 1º dia</a>
 </div>
 
 <script>
@@ -565,8 +565,11 @@
   // Desktop: mouse indo fechar a aba
   document.addEventListener('mouseout',e=>{if(!e.relatedTarget&&e.clientY<=15)show()});
   // Mobile: botão voltar
+  let hashNav=false;
+  document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a){hashNav=true;setTimeout(()=>hashNav=false,300)}},true);
   if(history.pushState){history.pushState({x:1},'');
-    addEventListener('popstate',()=>{if(!shown&&!sessionStorage.getItem('xseen')){show(true);history.pushState({x:1},'')}});}
+    addEventListener('popstate',()=>{if(hashNav)return;
+      if(!shown&&!sessionStorage.getItem('xseen')){show(true);history.pushState({x:1},'')}});}
 })();
 </script>
 </body>
