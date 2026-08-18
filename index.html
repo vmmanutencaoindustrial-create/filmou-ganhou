@@ -478,5 +478,96 @@
     stage.addEventListener('mouseleave',()=>phone.style.transform='');
   }
 </script>
+
+<!-- ===== EXIT INTENT ===== -->
+<style>
+  #exitov{position:fixed;inset:0;background:rgba(10,14,12,.68);backdrop-filter:blur(7px);z-index:300;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;pointer-events:none;transition:opacity .25s}
+  #exitov.on{opacity:1;pointer-events:auto}
+  .xcard{background:#fff;border-radius:24px;max-width:432px;width:100%;padding:30px 26px 24px;position:relative;text-align:center;box-shadow:0 46px 100px -30px rgba(0,0,0,.55);transform:translateY(16px) scale(.97);transition:transform .28s cubic-bezier(.2,.9,.3,1.2)}
+  #exitov.on .xcard{transform:none}
+  .xclose{position:absolute;top:12px;right:12px;width:34px;height:34px;border:none;border-radius:50%;background:#f0f2ef;color:var(--muted);font-size:1rem;font-weight:700;cursor:pointer;line-height:1}
+  .xbadge{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);background:var(--green-soft);border:1px solid var(--green-line);border-radius:999px;padding:6px 13px}
+  .xcard h3{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;letter-spacing:-.02em;line-height:1.15;margin:13px 0 6px}
+  .xcard p{color:var(--muted);font-size:.9rem;line-height:1.55}
+  .xcard p b{color:var(--ink)}
+  .xmath{display:flex;align-items:center;justify-content:center;gap:11px;margin:16px 0}
+  .xmath .m{border-radius:14px;padding:10px 15px;font-family:'Space Grotesk',sans-serif;font-weight:700}
+  .xmath .m small{display:block;font-family:'Inter',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;opacity:.7}
+  .xmath .a{background:#f0f2ef;color:var(--ink);font-size:1.05rem}
+  .xmath .b{background:linear-gradient(150deg,var(--green),var(--green-dark));color:var(--green-ink);font-size:1.05rem;box-shadow:0 10px 24px -10px var(--glow)}
+  .xmath .arr{color:var(--green-dark);font-weight:800;font-size:1.1rem}
+  .xcta{display:block;background:linear-gradient(160deg,var(--green),var(--green-dark));color:var(--green-ink);font-weight:800;font-size:1rem;padding:15px;border-radius:14px;text-decoration:none;margin-top:14px;box-shadow:0 16px 34px -14px var(--glow)}
+  .xcta:active{transform:scale(.98)}
+  .xback{display:inline-block;margin-top:11px;color:var(--muted);font-size:.78rem;text-decoration:underline;background:none;border:none;cursor:pointer}
+  .xguar{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:.7rem;color:var(--muted)}
+</style>
+<div id="exitov" role="dialog" aria-modal="true" aria-label="Antes de sair">
+  <div class="xcard">
+    <button class="xclose" id="exitx" aria-label="Fechar">✕</button>
+
+    <!-- DEGRAU 1: 25% OFF -->
+    <div class="xs" id="xs1">
+      <span class="xbadge">✋ calma — oferta de saída</span>
+      <h3>Leva o método com<br><span style="color:var(--green-deep)">25% de desconto</span></h3>
+      <div class="xmath">
+        <span class="m a" style="opacity:.55;font-family:'Inter',sans-serif;font-weight:600"><span style="text-decoration:line-through">R$ 19,90</span><small style="display:block">antes</small></span>
+        <span class="arr">→</span>
+        <span class="m b">R$ 14,92<small>cupom VOLTA25</small></span>
+      </div>
+      <p>O cupom entra <b>sozinho</b> no botão abaixo. Continua com <b>garantia de 7 dias</b> — e continua se pagando na sua <b>primeira hora aprovada</b>.</p>
+      <a class="xcta" href="https://pay.kiwify.com.br/UjFoGP3?coupon=VOLTA25">QUERO COM 25% OFF → R$ 14,92</a>
+      <button class="xback xnext" data-next="xs2">não quero o desconto</button>
+      <div class="xguar">🛡️ Garantia incondicional de 7 dias · acesso imediato</div>
+    </div>
+
+    <!-- DEGRAU 2: 50% OFF -->
+    <div class="xs" id="xs2" hidden>
+      <span class="xbadge">🚨 última chamada — não vai repetir</span>
+      <h3>Tá bom. <span style="color:var(--green-deep)">Metade do preço.</span></h3>
+      <div class="xmath">
+        <span class="m a" style="opacity:.55;font-family:'Inter',sans-serif;font-weight:600"><span style="text-decoration:line-through">R$ 19,90</span><small style="display:block">antes</small></span>
+        <span class="arr">→</span>
+        <span class="m b">R$ 9,95<small>cupom ULTIMA50</small></span>
+      </div>
+      <p>Isso é menos que <b>MEIA hora aprovada</b>. É o menor preço que esse guia vai ter — depois que fechar essa janela, volta pro cheio.</p>
+      <a class="xcta" href="https://pay.kiwify.com.br/UjFoGP3?coupon=ULTIMA50">FECHAR POR R$ 9,95 (50% OFF)</a>
+      <button class="xback xnext" data-next="xs3">mesmo assim não quero</button>
+      <div class="xguar">🛡️ Garantia de 7 dias vale igual</div>
+    </div>
+
+    <!-- DEGRAU 3: caminho grátis -->
+    <div class="xs" id="xs3" hidden>
+      <span class="xbadge">🤝 sem ressentimento</span>
+      <h3>Então vai pelo<br>caminho gratuito</h3>
+      <p style="margin-top:4px">O cadastro na plataforma é <b>100% grátis</b> — cria sua conta, pede seu kit e testa por conta própria. O método com o checklist de aprovação fica aqui pra quando você quiser voltar.</p>
+      <a class="xcta" href="https://ai.hub.xyz/r/9EYQCS30" target="_blank" rel="noopener">CRIAR MINHA CONTA GRÁTIS →</a>
+      <button class="xback" id="exitdone">fechar e continuar na página</button>
+      <div class="xguar">💡 dica: salva essa página — quem vai sem o checklist costuma voltar</div>
+    </div>
+
+  </div>
+</div>
+<script>
+(function(){
+  const ov=document.getElementById('exitov');
+  let shown=false,armed=false;
+  setTimeout(()=>armed=true,6000);
+  addEventListener('scroll',()=>{if(scrollY>innerHeight*.35)armed=true},{passive:true});
+  const show=()=>{if(shown||!armed||sessionStorage.getItem('xseen'))return;
+    shown=true;sessionStorage.setItem('xseen','1');ov.classList.add('on');document.body.style.overflow='hidden'};
+  const hide=()=>{ov.classList.remove('on');document.body.style.overflow=''};
+  document.getElementById('exitx').addEventListener('click',hide);
+  document.getElementById('exitdone').addEventListener('click',hide);
+  document.querySelectorAll('.xnext').forEach(b=>b.addEventListener('click',()=>{
+    b.closest('.xs').hidden=true;
+    document.getElementById(b.dataset.next).hidden=false;}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});
+  // Desktop: mouse indo fechar a aba
+  document.addEventListener('mouseout',e=>{if(!e.relatedTarget&&e.clientY<=0)show()});
+  // Mobile: botão voltar
+  if(history.pushState){history.pushState({x:1},'');
+    addEventListener('popstate',()=>show());}
+})();
+</script>
 </body>
 </html>
