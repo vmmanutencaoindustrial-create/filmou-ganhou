@@ -574,8 +574,7 @@
   document.addEventListener('click',e=>{if(e.target.closest('a[href^="#"]')){hashNav=true;setTimeout(()=>hashNav=false,300)}},true);
   // Trava do voltar criada SÓ após a 1ª interação — sem gesto o Chrome ignora o pushState no botão voltar
   const trap=()=>{if(trapped)return;trapped=true;history.pushState({x:1},'')};
-  ['pointerdown','keydown','touchstart'].forEach(ev=>addEventListener(ev,trap,{once:true}));
-  addEventListener('scroll',trap,{once:true,passive:true});
+  ['pointerdown','keydown','touchstart','wheel'].forEach(ev=>addEventListener(ev,trap,{once:true,passive:true}));
   addEventListener('popstate',()=>{if(hashNav)return;
     if(!shown&&!sessionStorage.getItem('xseen'))show(true);});
 })();
