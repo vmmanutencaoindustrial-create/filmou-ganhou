@@ -15,6 +15,22 @@ fbq('init','1993959867921089');
 fbq('track','PageView');
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="pay.kiwify"]');if(a&&window.fbq)fbq('track','InitiateCheckout');},true);
 </script>
+<!-- ============================================================
+     UTMIFY — trocar UTMIFY_PIXEL_ID_AQUI pelo ID real e pronto.
+     Enquanto for o placeholder, o script nao carrega.
+     ============================================================ -->
+<script>
+(function(){
+  var ID = 'UTMIFY_PIXEL_ID_AQUI';
+  if (ID.indexOf('AQUI') !== -1) return;      // ainda nao configurado
+  window.pixelId = ID;
+  var s = document.createElement('script');
+  s.src = 'https://cdn.utmify.com.br/scripts/pixel/pixel.js';
+  s.async = true; s.defer = true;
+  (document.head || document.documentElement).appendChild(s);
+})();
+</script>
+
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1993959867921089&ev=PageView&noscript=1"/></noscript>
 <style>
   :root{
