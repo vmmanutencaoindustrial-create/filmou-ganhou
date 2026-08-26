@@ -13,7 +13,9 @@
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1993959867921089');
 fbq('track','PageView');
-document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="pay.kiwify"]');if(a&&window.fbq)fbq('track','InitiateCheckout');},true);
+// InitiateCheckout: 1x por sessao. Sem a trava, cada clique no botao contava
+// um checkout novo (deu 20 IC pra 8 PageView em 26/08) e inflava o funil.
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="pay.kiwify"]');if(a&&window.fbq&&!window.__fgIC){window.__fgIC=1;fbq('track','InitiateCheckout',{},{eventID:'ic-'+Date.now()+'-'+Math.random().toString(36).slice(2,10)});}},true);
 </script>
 <!-- ============================================================
      UTMIFY — trocar 6a8b15a419d0a82613728778 pelo ID real e pronto.
