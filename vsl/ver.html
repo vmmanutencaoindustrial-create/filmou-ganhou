@@ -110,6 +110,12 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
 .faq details[open] summary .svgi{transform:rotate(180deg)}
 .faq details p{padding:0 0 13px;font-size:13.5px;color:var(--muted);line-height:1.5}
 .garantia .selo{color:var(--accent)}.garantia .selo .svgi{width:22px;height:22px}
+
+.bcard.wide{grid-column:1/-1;flex-direction:row;align-items:center;gap:12px}
+.bcard.wide>div:nth-child(2){flex:1}.bcard.wide b{display:block;margin-bottom:2px}
+.timer{display:flex;align-items:center;gap:8px;background:rgba(255,176,32,.10);border:1px solid rgba(255,176,32,.35);color:#ffd28a;border-radius:10px;padding:9px 12px;font-size:12.5px;margin:4px 0 12px}
+.timer .svgi{width:16px;height:16px;flex:none;color:var(--warn)}
+.timer b{margin-left:auto;font-family:'Space Grotesk',Inter,sans-serif;font-size:18px;color:#fff;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -154,6 +160,7 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
       <div class="bcard"><div class="bi"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 9-4 9 4-9 4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v8"/></svg></div><b>Kit de gravação</b><span>Faixa de cabeça + suporte. A plataforma envia na sua casa, sem custo.</span><span class="tag">Grátis</span></div>
       <div class="bcard"><div class="bi"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg></div><b>Mapa de 6 plataformas</b><span>Outras plataformas que pagam pelo mesmo tipo de gravação — pra não depender de uma.</span><span class="tag">Bônus</span></div>
       <div class="bcard"><div class="bi"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></div><b>Plano dos 7 dias</b><span>Do cadastro ao primeiro PIX, dia a dia, sem enrolação.</span><span class="tag">Bônus</span></div>
+      <div class="bcard wide"><div class="bi"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"/><path d="M16 14c3 0 6 2 6 5"/></svg></div><div><b>Grupo exclusivo</b><span>Comunidade fechada com suporte toda semana — tira dúvida, mostra o que gravou, aprende com quem já recebe.</span></div><span class="tag">Bônus</span></div>
     </div>
   </section>
 
@@ -169,7 +176,9 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
       <li>Como sacar via PIX</li>
       <li>Mapa com outras 6 plataformas que pagam pelo mesmo tipo de gravação</li>
       <li>Plano de 7 dias, do cadastro ao primeiro PIX</li>
+      <li>Grupo exclusivo com suporte toda semana</li>
     </ul>
+    <div class="timer" id="timer"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Acesso liberado nesta apresentação por</span><b id="cd">15:00</b></div>
     <div class="preco"><b id="preco">R$ 127</b><small>pagamento único · acesso imediato</small></div>
     <a class="cta" href="https://pay.kiwify.com.br/vEgAxR0">QUERO MEU ACESSO →</a>
     <div class="garantia"><div class="selo"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div><div><b>Garantia de 7 dias.</b> Não fez sentido pra você? Devolvo tudo, sem pergunta.</div></div>
@@ -184,6 +193,7 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
       <details><summary>Meu celular serve?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>iPhone 12 ou superior, ou Samsung Galaxy S21 ou superior — o que importa é câmera estável e boa qualidade. O guia traz a lista completa.</p></details>
       <details><summary>Quanto e quando eu recebo?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>Até R$ 25 por hora aprovada, podendo ser mais com bônus da plataforma. Não há renda garantida — depende das tarefas disponíveis e da aprovação dos vídeos. O plano de 7 dias leva do cadastro ao primeiro PIX; saque mínimo em torno de R$ 25.</p></details>
       <details><summary>Preciso de inglês ou investir em equipamento?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>Não e não. Sem inglês, sem diploma. O kit de gravação a plataforma envia de graça; você usa o seu celular.</p></details>
+      <details><summary>Tem suporte depois que eu comprar?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>Sim. Você entra no grupo exclusivo, com suporte toda semana — pra tirar dúvida de cadastro, gravação e saque com quem já está recebendo.</p></details>
       <details><summary>E se não funcionar pra mim?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>7 dias de garantia. Pediu, devolveu — integral, sem pergunta.</p></details>
     </div>
     <a class="cta" href="https://pay.kiwify.com.br/vEgAxR0" style="margin-top:18px">QUERO MEU ACESSO →</a>
@@ -218,7 +228,14 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
   // trava: nao deixa avancar alem do ja assistido
   v.addEventListener('seeking',function(){ if(v.currentTime>maxVisto+1.5) v.currentTime=maxVisto; });
   v.addEventListener('ended',revelar);
-  function revelar(){ if(revelado) return; revelado=true; document.querySelectorAll('.esconder').forEach(function(el){el.classList.remove('esconder');}); }
+  function revelar(){ if(revelado) return; revelado=true; document.querySelectorAll('.esconder').forEach(function(el){el.classList.remove('esconder');}); iniciarContador(); }
+  function iniciarContador(){
+    var box=document.getElementById('timer'), out=document.getElementById('cd'); if(!box||!out) return;
+    var K='fg_cd_end', end=0; try{ end=parseInt(localStorage.getItem(K)||'0',10); }catch(e){}
+    if(!end||end<Date.now()){ end=Date.now()+15*60*1000; try{ localStorage.setItem(K,String(end)); }catch(e){} }
+    function tick(){ var r=Math.max(0,Math.round((end-Date.now())/1000)); out.textContent=String(Math.floor(r/60)).padStart(2,'0')+':'+String(r%60).padStart(2,'0'); if(r<=0){ box.style.display='none'; clearInterval(iv); } }
+    tick(); var iv=setInterval(tick,1000);
+  }
 
   // prova social: toque = play/pause, um por vez
   var provas=document.querySelectorAll('.card video');
