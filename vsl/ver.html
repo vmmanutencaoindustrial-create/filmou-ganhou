@@ -52,7 +52,7 @@ h2{font-family:'Space Grotesk',Inter,sans-serif;font-size:clamp(21px,5.6vw,25px)
 h2 span{color:var(--accent)}
 .lista{list-style:none;display:grid;gap:8px;margin:14px 0 18px}
 .lista li{padding-left:24px;position:relative;font-size:14.5px}
-.lista li:before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700}
+.lista li:before{position:absolute;left:0}
 .preco{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:6px 0 4px}
 .preco b{font-family:'Space Grotesk',Inter,sans-serif;font-size:38px;color:var(--accent);letter-spacing:-.02em}
 .preco small{color:var(--muted);font-size:13px}
@@ -75,16 +75,51 @@ h2 span{color:var(--accent)}
 .card .cap b{display:block;color:var(--accent);font-size:12px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:3px}
 footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;border-top:1px solid var(--line);padding-top:16px}
 @media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+.svgi{width:1em;height:1em;display:inline-block;vertical-align:-.15em}
+.bar .svgi{width:16px;height:16px;margin-right:6px;vertical-align:-3px}
+.ovbox .ic{color:var(--accent)}.ovbox .ic .svgi{width:36px;height:36px}
+.card .play span .svgi{width:28px;height:28px;margin-left:3px}
+.lista li:before{content:"";width:16px;height:16px;top:3px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232ee06a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='m5 12 5 5 9-10'/></svg>") no-repeat center/contain}
+.sec{margin-top:28px}
+.sec h3{font-family:'Space Grotesk',Inter,sans-serif;font-size:19px;margin-bottom:4px}
+.sec p.sub{color:var(--muted);font-size:13.5px;margin-bottom:14px}
+.passos{display:grid;gap:10px}
+.passo{display:flex;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.passo .n{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(46,224,106,.14);color:var(--accent);display:flex;align-items:center;justify-content:center}
+.passo .n .svgi{width:22px;height:22px}
+.passo b{display:block;font-size:14.5px}.passo b em{font-style:normal;color:var(--accent);margin-right:6px}
+.passo span{font-size:13px;color:var(--muted);line-height:1.45}
+.bonus{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 12px;display:flex;flex-direction:column;gap:8px}
+.bcard .bi{width:38px;height:38px;border-radius:10px;background:rgba(46,224,106,.14);color:var(--accent);display:flex;align-items:center;justify-content:center}
+.bcard .bi .svgi{width:20px;height:20px}
+.bcard b{font-size:13.5px;line-height:1.25}
+.bcard span{font-size:12px;color:var(--muted);line-height:1.4;flex:1}
+.bcard .tag{align-self:flex-start;flex:none;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(46,224,106,.4);padding:3px 8px;border-radius:20px}
+.gar{margin-top:28px;background:linear-gradient(180deg,rgba(46,224,106,.12),rgba(46,224,106,.04));border:1px solid rgba(46,224,106,.35);border-radius:16px;padding:18px 16px;display:flex;gap:14px;align-items:flex-start}
+.gar .gs{flex:none;width:52px;height:52px;border-radius:50%;background:var(--accent);color:var(--ink);display:flex;align-items:center;justify-content:center}
+.gar .gs .svgi{width:28px;height:28px}
+.gar b{display:block;font-family:'Space Grotesk',Inter,sans-serif;font-size:17px;margin-bottom:4px}
+.gar p{font-size:13px;color:var(--muted);line-height:1.5}
+.faq{display:grid;gap:8px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 14px}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 0;font-weight:600;font-size:14px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .svgi{flex:none;width:18px;height:18px;color:var(--accent);transition:transform .2s}
+.faq details[open] summary .svgi{transform:rotate(180deg)}
+.faq details p{padding:0 0 13px;font-size:13.5px;color:var(--muted);line-height:1.5}
+.garantia .selo{color:var(--accent)}.garantia .selo .svgi{width:22px;height:22px}
 </style>
 </head>
 <body>
-<div class="bar">🔊 Toque no vídeo para ativar o som — o acesso é liberado no final</div>
+<div class="bar"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>Toque no vídeo para ativar o som — o acesso é liberado no final</div>
 <main class="wrap">
   <div class="brand">FILMOU<span>,</span>GANHOU.</div>
 
   <div class="player" id="player">
     <video id="vsl" src="vsl-fg-web.mp4" poster="poster-vsl.jpg" autoplay muted playsinline preload="auto" disablepictureinpicture controlslist="nodownload noplaybackrate"></video>
-    <div class="ov" id="ov"><div class="ovbox"><div class="ic">🔊</div><b>Toque para ouvir</b><span>o vídeo já começou</span></div></div>
+    <div class="ov" id="ov"><div class="ovbox"><div class="ic"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg></div><b>Toque para ouvir</b><span>o vídeo já começou</span></div></div>
     <div class="prog"><div class="fill" id="fill"></div></div>
   </div>
   <p class="hint">Assista até o final — o botão de acesso aparece quando ela liberar.</p>
@@ -94,12 +129,35 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
     <h3>Quem já está gravando</h3>
     <p class="sub">Pessoas reais, de rosto, mostrando o painel e o kit.</p>
     <div class="cards">
-      <div class="card"><div class="vid"><video src="prova-1.mp4" poster="p1.jpg" playsinline preload="none"></video><div class="play"><span>▶</span></div></div><div class="cap"><b>Painel na tela</b>Mais de R$ 1.000 no total, R$ 1.034 sacados — "e sim, estou colocando meu rostinho aqui".</div></div>
-      <div class="card"><div class="vid"><video src="prova-2.mp4" poster="p2.jpg" playsinline preload="none"></video><div class="play"><span>▶</span></div></div><div class="cap"><b>Kit na cabeça</b>Gravando a rotina de casa com o equipamento que a plataforma envia de graça.</div></div>
-      <div class="card"><div class="vid"><video src="prova-3.mp4" poster="p3.jpg" playsinline preload="none"></video><div class="play"><span>▶</span></div></div><div class="cap"><b>Por dentro do app</b>A lista de tarefas, a gravação e o guia aberto — o que você recebe.</div></div>
+      <div class="card"><div class="vid"><video src="prova-1.mp4" poster="p1.jpg" playsinline preload="none"></video><div class="play"><span><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span></div></div><div class="cap"><b>Painel na tela</b>Mais de R$ 1.000 no total, R$ 1.034 sacados — "e sim, estou colocando meu rostinho aqui".</div></div>
+      <div class="card"><div class="vid"><video src="prova-2.mp4" poster="p2.jpg" playsinline preload="none"></video><div class="play"><span><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span></div></div><div class="cap"><b>Kit na cabeça</b>Gravando a rotina de casa com o equipamento que a plataforma envia de graça.</div></div>
+      <div class="card"><div class="vid"><video src="prova-3.mp4" poster="p3.jpg" playsinline preload="none"></video><div class="play"><span><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span></div></div><div class="cap"><b>Por dentro do app</b>A lista de tarefas, a gravação e o guia aberto — o que você recebe.</div></div>
     </div>
     <a class="cta" href="https://pay.kiwify.com.br/vEgAxR0" style="margin-top:18px">GARANTIR MEU ACESSO →</a>
   </section>
+
+  <section class="sec" id="passos">
+    <h3>É simples — são três passos</h3>
+    <p class="sub">O guia te leva por cada um, do zero ao PIX.</p>
+    <div class="passos">
+      <div class="passo"><div class="n"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="4"/><path d="M2 21c0-4 3.6-7 8-7s8 3 8 7"/><path d="M19 8v6M16 11h6"/></svg></div><div><b><em>1</em>Cadastro</b><span>Cria a conta na plataforma principal do jeito certo (tem detalhe que reprova conta), pede o kit e libera seu perfil.</span></div></div>
+      <div class="passo"><div class="n"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg></div><div><b><em>2</em>Gravação</b><span>Prende o celular no kit, grava a tarefa que já ia fazer — louça, roupa, cozinha — seguindo o checklist de aprovação.</span></div></div>
+      <div class="passo"><div class="n"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M2 10h2M20 10h2M2 14h2M20 14h2"/></svg></div><div><b><em>3</em>Recebimento</b><span>Vídeo aprovado vira hora paga. Saque via PIX a partir de R$ 25, direto na sua conta.</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec" id="recebe">
+    <h3>O que você recebe hoje</h3>
+    <p class="sub">Tudo liberado na hora, acesso vitalício.</p>
+    <div class="bonus">
+      <div class="bcard"><div class="bi"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1 1 2-2M3 12l1 1 2-2M3 18l1 1 2-2"/></svg></div><b>Método completo</b><span>Cadastro, checklist de aprovação, setup de gravação e saque — passo a passo.</span><span class="tag">Principal</span></div>
+      <div class="bcard"><div class="bi"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 9-4 9 4-9 4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v8"/></svg></div><b>Kit de gravação</b><span>Faixa de cabeça + suporte. A plataforma envia na sua casa, sem custo.</span><span class="tag">Grátis</span></div>
+      <div class="bcard"><div class="bi"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg></div><b>Mapa de 6 plataformas</b><span>Outras plataformas que pagam pelo mesmo tipo de gravação — pra não depender de uma.</span><span class="tag">Bônus</span></div>
+      <div class="bcard"><div class="bi"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></div><b>Plano dos 7 dias</b><span>Do cadastro ao primeiro PIX, dia a dia, sem enrolação.</span><span class="tag">Bônus</span></div>
+    </div>
+  </section>
+
+  <div class="gar"><div class="gs"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div><div><b>Garantia incondicional de 7 dias</b><p>Entrou, viu tudo e achou que não é pra você? Pede o reembolso e o valor volta integral, sem pergunta. Está na lei (CDC, art. 49) e está no seu acesso.</p></div></div>
 
   <section class="oferta" id="oferta">
     <span class="eyebrow">Acesso liberado</span>
@@ -114,7 +172,21 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
     </ul>
     <div class="preco"><b id="preco">R$ 127</b><small>pagamento único · acesso imediato</small></div>
     <a class="cta" href="https://pay.kiwify.com.br/vEgAxR0">QUERO MEU ACESSO →</a>
-    <div class="garantia"><div class="selo">🛡️</div><div><b>Garantia de 7 dias.</b> Não fez sentido pra você? Devolvo tudo, sem pergunta.</div></div>
+    <div class="garantia"><div class="selo"><svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div><div><b>Garantia de 7 dias.</b> Não fez sentido pra você? Devolvo tudo, sem pergunta.</div></div>
+  </section>
+
+  <section class="sec" id="faq">
+    <h3>Perguntas frequentes</h3>
+    <div class="faq">
+      <details><summary>Isso é golpe?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>Não. São plataformas que compram vídeos para treinar inteligência artificial — mercado real, com empresa pagando pelo material. O guia mostra como se cadastrar do jeito certo e gravar dentro do padrão de aprovação.</p></details>
+      <details><summary>Preciso aparecer no vídeo?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>Não. Só as suas mãos aparecem. Não precisa mostrar o rosto, falar, nem postar nada em rede social.</p></details>
+      <details><summary>Preciso vender algo ou chamar amigos?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>Não. Não é indicação nem multinível. Você é paga pelas suas próprias gravações.</p></details>
+      <details><summary>Meu celular serve?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>iPhone 12 ou superior, ou Samsung Galaxy S21 ou superior — o que importa é câmera estável e boa qualidade. O guia traz a lista completa.</p></details>
+      <details><summary>Quanto e quando eu recebo?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>Até R$ 25 por hora aprovada, podendo ser mais com bônus da plataforma. Não há renda garantida — depende das tarefas disponíveis e da aprovação dos vídeos. O plano de 7 dias leva do cadastro ao primeiro PIX; saque mínimo em torno de R$ 25.</p></details>
+      <details><summary>Preciso de inglês ou investir em equipamento?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>Não e não. Sem inglês, sem diploma. O kit de gravação a plataforma envia de graça; você usa o seu celular.</p></details>
+      <details><summary>E se não funcionar pra mim?<svg class="svgi" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary><p>7 dias de garantia. Pediu, devolveu — integral, sem pergunta.</p></details>
+    </div>
+    <a class="cta" href="https://pay.kiwify.com.br/vEgAxR0" style="margin-top:18px">QUERO MEU ACESSO →</a>
   </section>
 
   <footer class="">
