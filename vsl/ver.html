@@ -225,9 +225,10 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
     if(window.fbq) fbq('trackCustom',nome,{},{eventID:nome+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,8)}); }
   v.addEventListener('timeupdate',function(){
     if(v.currentTime>maxVisto) maxVisto=v.currentTime;
-    if(v.duration){var pc=v.currentTime/v.duration;
-      if(pc>=.05)marco('VSL05');if(pc>=.25)marco('VSL25');if(pc>=.50)marco('VSL50');if(pc>=.75)marco('VSL75');}
-    if(v.currentTime>=DELAY) marco('VSLPitch');
+    // marcos por MINUTO real — mostram exatamente onde a audiencia cai
+    var min=Math.floor(v.currentTime/60);
+    [1,2,3,5,7,10,13,16,18].forEach(function(m){ if(min>=m) marco('VSL_'+m+'min'); });
+    if(v.currentTime>=DELAY) marco('VSLPitch');   // 18min48s — oferta liberada
     if(v.duration){ var p=v.currentTime/v.duration; fill.style.width=(Math.pow(p,0.45)*100).toFixed(2)+'%'; }
     if(!revelado && v.currentTime>=DELAY) revelar();
   });
