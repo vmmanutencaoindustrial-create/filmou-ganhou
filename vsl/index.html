@@ -117,14 +117,10 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
 .timer .svgi{width:16px;height:16px;flex:none;color:var(--warn)}
 .timer b{margin-left:auto;font-family:'Space Grotesk',Inter,sans-serif;font-size:18px;color:#fff;font-variant-numeric:tabular-nums}
 
-.bar{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
-.bar .bl{font-weight:700}
-.bar .bc{font-family:'Space Grotesk',Inter,sans-serif;font-size:15px;font-variant-numeric:tabular-nums;background:rgba(4,23,11,.18);padding:2px 9px;border-radius:8px}
-.bar.fim{background:#ffb020}
 </style>
 </head>
 <body>
-<div class="bar" id="topbar"><span class="bl" id="barmsg">Toque no vídeo para ativar o som — o acesso é liberado no final</span><b class="bc" id="topcd">30:00</b></div>
+<div class="bar">Toque no vídeo para ativar o som — o acesso é liberado no final</div>
 <main class="wrap">
   <div class="brand">FILMOU<span>,</span>GANHOU.</div>
 
@@ -241,26 +237,16 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
   v.addEventListener('seeking',function(){ if(v.currentTime>maxVisto+1.5) v.currentTime=maxVisto; });
   v.addEventListener('ended',revelar);
   function revelar(){ if(revelado) return; revelado=true; document.querySelectorAll('.esconder').forEach(function(el){el.classList.remove('esconder');}); iniciarContador(); }
-  // relogio unico de 30 min: comeca quando a pessoa entra, some quando zera
-  var CD_MIN=30, CD_KEY='fg_cd_end', cdEnd=0;
-  try{ cdEnd=parseInt(localStorage.getItem(CD_KEY)||'0',10); }catch(e){}
-  if(!cdEnd||cdEnd<Date.now()){ cdEnd=Date.now()+CD_MIN*60*1000; try{ localStorage.setItem(CD_KEY,String(cdEnd)); }catch(e){} }
-  function fmt(r){ return String(Math.floor(r/60)).padStart(2,'0')+':'+String(r%60).padStart(2,'0'); }
-  (function relogio(){
-    var top=document.getElementById('topcd'), msg=document.getElementById('barmsg'), bar=document.getElementById('topbar');
-    function tick(){
-      var r=Math.max(0,Math.round((cdEnd-Date.now())/1000)), t=fmt(r);
-      if(top) top.textContent=t;
-      var of=document.getElementById('cd'); if(of) of.textContent=t;
-      if(r<=0){ if(top) top.style.display='none';
-        if(msg) msg.textContent='Tempo desta apresentação encerrado — recarregue a página para assistir de novo';
-        if(bar) bar.classList.add('fim');
-        var box=document.getElementById('timer'); if(box) box.style.display='none';
-        clearInterval(iv); }
-    }
+  // contador: SO existe depois que a oferta e liberada; 15 min a partir daquele momento
+  function iniciarContador(){
+    var box=document.getElementById('timer'), out=document.getElementById('cd'); if(!box||!out) return;
+    var K='fg_cd_end', end=0; try{ end=parseInt(localStorage.getItem(K)||'0',10); }catch(e){}
+    if(!end||end<Date.now()){ end=Date.now()+15*60*1000; try{ localStorage.setItem(K,String(end)); }catch(e){} }
+    function tick(){ var r=Math.max(0,Math.round((end-Date.now())/1000));
+      out.textContent=String(Math.floor(r/60)).padStart(2,'0')+':'+String(r%60).padStart(2,'0');
+      if(r<=0){ box.style.display='none'; clearInterval(iv); } }
     tick(); var iv=setInterval(tick,1000);
-  })();
-  function iniciarContador(){}
+  }
   // prova social: toque = play/pause, um por vez
   var provas=document.querySelectorAll('.card video');
   provas.forEach(function(pv){
