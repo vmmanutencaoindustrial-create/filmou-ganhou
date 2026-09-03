@@ -217,11 +217,17 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
   document.querySelectorAll('a.cta').forEach(function(a){ a.href = q ? FG.checkout+q : FG.checkout; });
 
   v.play().catch(function(){});
-  ov.addEventListener('click',function(){ v.muted=false; v.currentTime=0; maxVisto=0; v.play(); ov.style.display='none'; });
+  ov.addEventListener('click',function(){ if(window.fbq)fbq('trackCustom','VSLSom');v.muted=false; v.currentTime=0; maxVisto=0; v.play(); ov.style.display='none'; });
   v.addEventListener('click',function(){ if(ov.style.display==='none'){ v.paused ? v.play() : v.pause(); } });
 
+  // ---- retencao: marcos do video viram eventos no pixel (1x cada) ----
+  var marcos={}; function marco(nome){ if(marcos[nome])return; marcos[nome]=1;
+    if(window.fbq) fbq('trackCustom',nome,{},{eventID:nome+'-'+Date.now()+'-'+Math.random().toString(36).slice(2,8)}); }
   v.addEventListener('timeupdate',function(){
     if(v.currentTime>maxVisto) maxVisto=v.currentTime;
+    if(v.duration){var pc=v.currentTime/v.duration;
+      if(pc>=.05)marco('VSL05');if(pc>=.25)marco('VSL25');if(pc>=.50)marco('VSL50');if(pc>=.75)marco('VSL75');}
+    if(v.currentTime>=DELAY) marco('VSLPitch');
     if(v.duration){ var p=v.currentTime/v.duration; fill.style.width=(Math.pow(p,0.45)*100).toFixed(2)+'%'; }
     if(!revelado && v.currentTime>=DELAY) revelar();
   });
