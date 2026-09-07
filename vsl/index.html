@@ -35,6 +35,10 @@ body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-s
 .wrap{width:94%;max-width:440px;margin:0 auto;padding:14px 0 40px}
 .brand{font-family:'Space Grotesk',Inter,sans-serif;font-weight:700;font-size:15px;letter-spacing:.02em;text-align:center;margin:4px 0 12px}
 .brand span{color:var(--accent)}
+.hl{text-align:center;margin:0 4px 12px}
+.hl h1{font-family:'Space Grotesk',Inter,sans-serif;font-weight:700;font-size:clamp(23px,6.8vw,30px);line-height:1.12;color:#fff;letter-spacing:-.01em}
+.hl h1 em{font-style:normal;color:var(--accent)}
+.hl p{font-size:14.5px;color:var(--muted);line-height:1.45;margin-top:7px}
 .player{position:relative;background:#000;border-radius:14px;overflow:hidden;aspect-ratio:9/16;box-shadow:0 0 0 1px var(--line),0 18px 40px rgba(0,0,0,.5)}
 .player video{width:100%;height:100%;object-fit:cover;display:block}
 .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(0,0,0,.62);cursor:pointer;text-align:center;padding:24px;-webkit-tap-highlight-color:transparent}
@@ -126,6 +130,7 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
 <div class="bar" id="bar">▶ Toque para assistir com som — o acesso é liberado no final</div>
 <main class="wrap">
   <div class="brand">FILMOU<span>,</span>GANHOU.</div>
+  <div class="hl" id="hl"><h1 id="hlt">Isso <em>NÃO</em> vai te deixar rica.</h1><p id="hls">É o trabalho pequeno, de casa, que muita gente faz errado e não recebe. Toque no vídeo e assista com som.</p></div>
 
   <div class="player" id="player">
     <video id="vsl" src="vsl-fg-web.mp4" poster="poster-vsl.jpg" autoplay muted playsinline preload="auto" disablepictureinpicture controlslist="nodownload noplaybackrate"></video>
@@ -215,6 +220,15 @@ footer{margin-top:30px;color:var(--muted);font-size:11.5px;line-height:1.55;bord
   // Atalhos de revisao: ?t=SEGUNDOS pula pra esse ponto; ?preview=1 mostra a pagina inteira na hora
   var qs=new URLSearchParams(location.search), t0=parseFloat(qs.get('t'))||0;
   if(t0>0){ v.addEventListener('loadedmetadata',function(){ v.currentTime=t0; maxVisto=t0; },{once:true}); }
+  // Headline acompanha o gancho do anuncio (utm_content). Sem utm = gancho do criativo que vendeu.
+  var HL={
+    'kit':['Ela grava a rotina de casa com o <em>kit na cabeça</em>.','Sem aparecer, sem postar. Toque no vídeo e veja como funciona, com som.'],
+    'celular':['Seu celular já está na <em>lista</em> dos que servem.','Não precisa de aparelho bom. Toque no vídeo e assista com som.'],
+    'reportagem':['<em>Saiu no jornal</em>: plataformas pagam por vídeo de tarefa de casa.','O que a reportagem não explica é como ser aprovada. Toque e assista com som.'],
+    'saque':['Louça, roupa, varal. <em>Só as mãos</em> aparecem.','Toque no vídeo e veja o passo a passo, com som.']
+  };
+  var uc=(qs.get('utm_content')||'').toLowerCase();
+  for(var k in HL){ if(uc.indexOf(k)>-1){ document.getElementById('hlt').innerHTML=HL[k][0]; document.getElementById('hls').textContent=HL[k][1]; break; } }
   if(qs.get('preview')==='1'){ setTimeout(revelar,0); }
   document.getElementById('preco').textContent=FG.preco;
   var q=location.search;
